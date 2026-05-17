@@ -41,7 +41,7 @@ export function Header({ mode }: HeaderProps) {
 
       <header className="bg-white sticky top-0 z-30 border-b border-rb-card">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
-          <div className="flex items-center justify-between h-28">
+          <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0">
               <Image
