@@ -24,6 +24,10 @@ export const metadata: Metadata = {
   },
   description:
     'Custom hats, apparel, and embroidery services in Milton, MA. Serving the South Shore since 2017.',
+  icons: {
+    icon: '/brand/royalbacks logo 2.jpeg',
+    apple: '/brand/royalbacks logo 2.jpeg',
+  },
   openGraph: {
     siteName: 'Royal Backs',
     locale: 'en_US',

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface FooterProps {
   showNap?: boolean
@@ -117,7 +118,16 @@ export function Footer({ showNap = false }: FooterProps) {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10 mt-14 pt-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-white/40">
+        <div className="border-t border-white/10 mt-14 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
+          <Link href="/">
+            <Image
+              src="/brand/royalbacks logo 2.jpeg"
+              alt="Royal Backs"
+              width={80}
+              height={80}
+              className="h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </Link>
           <p>&copy; {new Date().getFullYear()} RoyalBacks LLC. All rights reserved.</p>
           <p>Made by <span className="text-white/60">TETRA MEDIA</span></p>
         </div>
