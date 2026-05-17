@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -42,11 +43,15 @@ export function Header({ mode }: HeaderProps) {
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link
-              href="/"
-              className="font-display text-xl font-bold tracking-tight text-rb-black uppercase hover:text-rb-green transition-colors"
-            >
-              ROYAL BACKS
+            <Link href="/" className="flex-shrink-0">
+              <Image
+                src="/brand/royalbacks logo.webp"
+                alt="Royal Backs"
+                width={140}
+                height={56}
+                className="h-12 w-auto object-contain"
+                priority
+              />
             </Link>
 
             {/* Desktop nav */}
