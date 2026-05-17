@@ -47,9 +47,9 @@ export function Header({ mode }: HeaderProps) {
               <Image
                 src="/brand/royalbacks logo.webp"
                 alt="Royal Backs"
-                width={140}
-                height={56}
-                className="h-12 w-auto object-contain"
+                width={200}
+                height={80}
+                className="h-16 w-auto object-contain mix-blend-multiply"
                 priority
               />
             </Link>
