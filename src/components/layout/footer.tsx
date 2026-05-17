@@ -50,24 +50,6 @@ export function Footer({ showNap = false }: FooterProps) {
             </ul>
           </div>
 
-          {/* About */}
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-widest text-white mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>Company</h3>
-            <ul className="space-y-3 text-sm">
-              {[
-                { label: 'About Us', href: '/about' },
-                { label: 'Blog', href: '/blog' },
-                { label: 'Custom Embroidery', href: '/embroidery' },
-              ].map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-white/70 hover:text-white transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Contact */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-widest text-white mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>Contact</h3>
@@ -89,7 +71,7 @@ export function Footer({ showNap = false }: FooterProps) {
           </div>
 
           {/* Newsletter */}
-          <div>
+          <div className="lg:col-span-2">
             <h3 className="text-xs font-bold uppercase tracking-widest text-white mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>Stay in the Loop</h3>
             <p className="text-sm text-white/70 mb-4 leading-relaxed">
               New drops, restocks, and local events. No spam.
