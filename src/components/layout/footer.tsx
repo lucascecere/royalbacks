@@ -50,15 +50,14 @@ export function Footer({ showNap = false }: FooterProps) {
             </ul>
           </div>
 
-          {/* Policies */}
+          {/* About */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-widest text-white mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>Policies</h3>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-white mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>Company</h3>
             <ul className="space-y-3 text-sm">
               {[
-                { label: 'Terms & Conditions', href: '/policies/terms' },
-                { label: 'Privacy Policy', href: '/policies/privacy' },
-                { label: 'Shipping & Returns', href: '/policies/shipping' },
-                { label: 'Accessibility', href: '/policies/accessibility' },
+                { label: 'About Us', href: '/about' },
+                { label: 'Blog', href: '/blog' },
+                { label: 'Custom Embroidery', href: '/embroidery' },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-white/70 hover:text-white transition-colors">
@@ -119,17 +118,32 @@ export function Footer({ showNap = false }: FooterProps) {
 
         {/* Bottom bar */}
         <div className="border-t border-white/10 mt-14 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
-          <Link href="/">
-            <Image
-              src="/brand/royalbacks logo 2.jpeg"
-              alt="Royal Backs"
-              width={80}
-              height={80}
-              className="h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
-            />
-          </Link>
-          <p>&copy; {new Date().getFullYear()} RoyalBacks LLC. All rights reserved.</p>
-          <p>Made by <span className="text-white/60">TETRA MEDIA</span></p>
+          <div className="flex items-center gap-6">
+            <Link href="/">
+              <Image
+                src="/brand/royalbacks logo 2.jpeg"
+                alt="Royal Backs"
+                width={80}
+                height={80}
+                className="h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+              />
+            </Link>
+            <p>&copy; {new Date().getFullYear()} RoyalBacks LLC. All rights reserved.</p>
+          </div>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-right">
+            {[
+              { label: 'Terms & Conditions', href: '/policies/terms' },
+              { label: 'Privacy Policy', href: '/policies/privacy' },
+              { label: 'Shipping & Returns', href: '/policies/shipping' },
+              { label: 'Accessibility', href: '/policies/accessibility' },
+            ].map((link) => (
+              <Link key={link.href} href={link.href} className="hover:text-white/70 transition-colors whitespace-nowrap">
+                {link.label}
+              </Link>
+            ))}
+            <span className="text-white/30">·</span>
+            <span className="text-white/40">Managed By Your Website Friend</span>
+          </div>
         </div>
       </div>
     </footer>
