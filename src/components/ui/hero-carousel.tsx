@@ -18,8 +18,8 @@ interface HeroSlide {
 const SLIDES: HeroSlide[] = [
   {
     id: 'purpose',
-    image: null,
-    bgColor: '#E8E4DC',
+    image: '/brand/RB Hero Photo.webp',
+    bgColor: '#5B7A8A',
     headline: ['WALKING WITH', 'PURPOSE.'],
     sub: 'Custom embroidery for apparel & accessories',
     ctaLabel: 'Shop Now',
@@ -81,7 +81,7 @@ export function HeroCarousel() {
   }, [index, paused, next])
 
   const slide = SLIDES[index]
-  const isDark = slide.bgColor.startsWith('#1') || slide.bgColor === '#000000'
+  const isDark = slide.image !== null || slide.bgColor.startsWith('#1') || slide.bgColor === '#000000'
 
   const variants = {
     enter: (d: number) => ({ x: d > 0 ? '100%' : '-100%', opacity: 0 }),
