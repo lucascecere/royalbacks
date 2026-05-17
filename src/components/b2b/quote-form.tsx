@@ -26,9 +26,9 @@ function ProgressBar({ step }: { step: number }) {
         <span>Step {step} of {STEP_COUNT}</span>
         <span>{Math.round(pct)}% complete</span>
       </div>
-      <div className="h-1.5 bg-rb-border rounded-full overflow-hidden">
+      <div className="h-1.5 bg-rb-card rounded-full overflow-hidden">
         <div
-          className="h-full bg-rb-gold rounded-full transition-all duration-300"
+          className="h-full bg-rb-green rounded-full transition-all duration-300"
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -37,8 +37,8 @@ function ProgressBar({ step }: { step: number }) {
 }
 
 const inputClass =
-  'w-full border border-rb-border rounded-sm px-3 py-2 text-rb-navy text-sm focus:outline-none focus:border-rb-navy placeholder:text-rb-muted/60 bg-white'
-const labelClass = 'block text-sm font-medium text-rb-navy mb-1'
+  'w-full border border-rb-border rounded-[7px] px-3 py-2 text-rb-black text-sm focus:outline-none focus:border-rb-black placeholder:text-rb-muted/60 bg-white'
+const labelClass = 'block text-sm font-medium text-rb-black mb-1'
 const errorClass = 'text-xs text-red-500 mt-1'
 
 function Step1Form({ onNext, defaultValues }: { onNext: (d: Step1Data) => void; defaultValues: Partial<Step1Data> }) {
@@ -49,7 +49,7 @@ function Step1Form({ onNext, defaultValues }: { onNext: (d: Step1Data) => void; 
   return (
     <form onSubmit={handleSubmit(onNext)} noValidate>
       <div className="space-y-4">
-        <h2 className="font-display text-xl font-semibold text-rb-navy mb-6">Your Contact Info</h2>
+        <h2 className="font-display text-xl font-bold text-rb-black mb-6">Your Contact Info</h2>
         <div>
           <label className={labelClass} htmlFor="name">Full Name *</label>
           <input id="name" type="text" placeholder="Jane Smith" className={inputClass} {...register('name')} />
@@ -69,7 +69,7 @@ function Step1Form({ onNext, defaultValues }: { onNext: (d: Step1Data) => void; 
           <input id="company" type="text" placeholder="Acme Sports" className={inputClass} {...register('company')} />
         </div>
       </div>
-      <button type="submit" className="flex-1 w-full mt-8 py-3 bg-rb-navy text-rb-cream font-medium rounded-sm hover:bg-rb-navy-light transition-colors">
+      <button type="submit" className="flex-1 w-full mt-8 py-3 bg-rb-green text-white font-bold rounded-[7px] hover:bg-rb-green-dark transition-colors uppercase text-sm" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
         Continue
       </button>
     </form>
@@ -84,7 +84,7 @@ function Step2Form({ onNext, onBack, defaultValues }: { onNext: (d: Step2Data) =
   return (
     <form onSubmit={handleSubmit(onNext)} noValidate>
       <div className="space-y-4">
-        <h2 className="font-display text-xl font-semibold text-rb-navy mb-6">About Your Order</h2>
+        <h2 className="font-display text-xl font-bold text-rb-black mb-6">About Your Order</h2>
         <div>
           <label className={labelClass} htmlFor="garment_type">Garment Type *</label>
           <select id="garment_type" className={inputClass} {...register('garment_type')}>
@@ -115,8 +115,8 @@ function Step2Form({ onNext, onBack, defaultValues }: { onNext: (d: Step2Data) =
         </div>
       </div>
       <div className="flex gap-4 mt-8">
-        <button type="button" onClick={onBack} className="px-6 py-3 border border-rb-border text-rb-navy text-sm font-medium rounded-sm hover:border-rb-navy transition-colors">Back</button>
-        <button type="submit" className="flex-1 py-3 bg-rb-navy text-rb-cream font-medium rounded-sm hover:bg-rb-navy-light transition-colors">Continue</button>
+        <button type="button" onClick={onBack} className="px-6 py-3 border border-rb-border text-rb-black text-sm font-medium rounded-[7px] hover:border-rb-black transition-colors">Back</button>
+        <button type="submit" className="flex-1 py-3 bg-rb-green text-white font-bold rounded-[7px] hover:bg-rb-green-dark transition-colors uppercase text-sm" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>Continue</button>
       </div>
     </form>
   )
@@ -131,17 +131,17 @@ function Step3Form({ onNext, onBack, defaultValues }: { onNext: (d: Step3Data) =
   return (
     <form onSubmit={handleSubmit(onNext)} noValidate>
       <div className="space-y-4">
-        <h2 className="font-display text-xl font-semibold text-rb-navy mb-6">Your Artwork</h2>
+        <h2 className="font-display text-xl font-bold text-rb-black mb-6">Your Artwork</h2>
         <div>
           <p className={labelClass}>Do you have existing artwork? *</p>
           <div className="flex gap-4 mt-2">
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" value="true" {...register('has_artwork', { setValueAs: (v: string) => v === 'true' })} className="accent-rb-navy" />
-              <span className="text-sm text-rb-navy">Yes, I have a file</span>
+              <input type="radio" value="true" {...register('has_artwork', { setValueAs: (v: string) => v === 'true' })} className="accent-rb-green" />
+              <span className="text-sm text-rb-black">Yes, I have a file</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" value="false" {...register('has_artwork', { setValueAs: (v: string) => v === 'true' })} className="accent-rb-navy" />
-              <span className="text-sm text-rb-navy">No, I need design help</span>
+              <input type="radio" value="false" {...register('has_artwork', { setValueAs: (v: string) => v === 'true' })} className="accent-rb-green" />
+              <span className="text-sm text-rb-black">No, I need design help</span>
             </label>
           </div>
         </div>
@@ -165,14 +165,14 @@ function Step3Form({ onNext, onBack, defaultValues }: { onNext: (d: Step3Data) =
           <textarea id="artwork_description" rows={3} placeholder={hasArtwork === false ? 'Company name in block letters, shield graphic...' : 'Team logo with name underneath, approx 3 inches wide...'} className={`${inputClass} resize-none`} {...register('artwork_description')} />
         </div>
         {hasArtwork === false && (
-          <div className="bg-rb-surface border border-rb-border rounded-sm p-4 text-sm text-rb-muted">
+          <div className="bg-rb-card border border-rb-border rounded-[7px] p-4 text-sm text-rb-muted">
             No problem — we can help with design. Describe what you&apos;re envisioning and we&apos;ll work with you from there.
           </div>
         )}
       </div>
       <div className="flex gap-4 mt-8">
-        <button type="button" onClick={onBack} className="px-6 py-3 border border-rb-border text-rb-navy text-sm font-medium rounded-sm hover:border-rb-navy transition-colors">Back</button>
-        <button type="submit" className="flex-1 py-3 bg-rb-navy text-rb-cream font-medium rounded-sm hover:bg-rb-navy-light transition-colors">Continue</button>
+        <button type="button" onClick={onBack} className="px-6 py-3 border border-rb-border text-rb-black text-sm font-medium rounded-[7px] hover:border-rb-black transition-colors">Back</button>
+        <button type="submit" className="flex-1 py-3 bg-rb-green text-white font-bold rounded-[7px] hover:bg-rb-green-dark transition-colors uppercase text-sm" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>Continue</button>
       </div>
     </form>
   )
@@ -192,7 +192,7 @@ function Step4Form({ onSubmit, onBack, defaultValues, isSubmitting, serverError 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="space-y-4">
-        <h2 className="font-display text-xl font-semibold text-rb-navy mb-6">Timeline & Budget</h2>
+        <h2 className="font-display text-xl font-bold text-rb-black mb-6">Timeline & Budget</h2>
         <div>
           <label className={labelClass} htmlFor="deadline">When do you need it by? *</label>
           <select id="deadline" className={inputClass} {...register('deadline')}>
@@ -219,13 +219,13 @@ function Step4Form({ onSubmit, onBack, defaultValues, isSubmitting, serverError 
         </div>
       </div>
       {serverError && (
-        <p className="mt-4 text-sm text-red-500 bg-red-50 border border-red-200 rounded-sm px-4 py-3">
+        <p className="mt-4 text-sm text-red-500 bg-red-50 border border-red-200 rounded-[7px] px-4 py-3">
           {serverError}
         </p>
       )}
       <div className="flex gap-4 mt-8">
-        <button type="button" onClick={onBack} className="px-6 py-3 border border-rb-border text-rb-navy text-sm font-medium rounded-sm hover:border-rb-navy transition-colors">Back</button>
-        <button type="submit" disabled={isSubmitting} className="flex-1 py-3 bg-rb-navy text-rb-cream font-medium rounded-sm hover:bg-rb-navy-light transition-colors disabled:opacity-60 disabled:cursor-wait">
+        <button type="button" onClick={onBack} className="px-6 py-3 border border-rb-border text-rb-black text-sm font-medium rounded-[7px] hover:border-rb-black transition-colors">Back</button>
+        <button type="submit" disabled={isSubmitting} className="flex-1 py-3 bg-rb-green text-white font-bold rounded-[7px] hover:bg-rb-green-dark transition-colors disabled:opacity-60 disabled:cursor-wait uppercase text-sm" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
           {isSubmitting ? 'Submitting...' : 'Submit Quote Request'}
         </button>
       </div>
@@ -284,12 +284,12 @@ export function QuoteForm() {
   if (submitted) {
     return (
       <div className="text-center py-12 space-y-4">
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-          <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-16 h-16 bg-rb-green/10 rounded-full flex items-center justify-center mx-auto">
+          <svg className="w-8 h-8 text-rb-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h2 className="font-display text-2xl font-bold text-rb-navy">Quote Request Received</h2>
+        <h2 className="font-display text-2xl font-bold text-rb-black">Quote Request Received</h2>
         <p className="text-rb-muted max-w-sm mx-auto">
           We&apos;ll review your request and get back to you within 1 business day.
         </p>
@@ -298,7 +298,7 @@ export function QuoteForm() {
             Confirmation: <span className="font-mono">{confirmationId}</span>
           </p>
         )}
-        <a href="/embroidery" className="inline-block text-rb-navy underline text-sm hover:text-rb-gold transition-colors">
+        <a href="/embroidery" className="inline-block text-rb-green underline text-sm hover:text-rb-green-dark transition-colors">
           Back to Embroidery Services
         </a>
       </div>
@@ -306,7 +306,7 @@ export function QuoteForm() {
   }
 
   return (
-    <div className="bg-white border border-rb-border rounded-sm p-6 sm:p-8">
+    <div className="bg-white border border-rb-border rounded-[12px] p-6 sm:p-8">
       <ProgressBar step={step} />
       {step === 1 && <Step1Form onNext={handleStep1} defaultValues={step1Data} />}
       {step === 2 && <Step2Form onNext={handleStep2} onBack={() => setStep(1)} defaultValues={step2Data} />}

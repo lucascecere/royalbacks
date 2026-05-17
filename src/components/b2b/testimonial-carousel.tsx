@@ -39,11 +39,11 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
           transition={{ duration: 0.3 }}
           className="text-center"
         >
-          <p className="font-display text-xl text-rb-navy leading-relaxed mb-6">
+          <p className="font-display text-xl text-rb-black leading-relaxed mb-6">
             &ldquo;{current.quote}&rdquo;
           </p>
           <footer className="text-sm text-rb-muted">
-            <span className="font-medium text-rb-navy">{current.author}</span>
+            <span className="font-bold text-rb-black">{current.author}</span>
             {current.role && <span> &mdash; {current.role}</span>}
             {current.company && <span>, {current.company}</span>}
           </footer>
@@ -54,7 +54,7 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
           <button
             onClick={() => go(-1)}
             aria-label="Previous testimonial"
-            className="p-2 text-rb-muted hover:text-rb-navy transition-colors"
+            className="p-2 text-rb-muted hover:text-rb-black transition-colors"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -68,7 +68,7 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
                 }}
                 aria-label={`Go to testimonial ${i + 1}`}
                 className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                  i === index ? 'bg-rb-navy' : 'bg-rb-border'
+                  i === index ? 'bg-rb-black' : 'bg-rb-border'
                 }`}
               />
             ))}
@@ -76,7 +76,7 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
           <button
             onClick={() => go(1)}
             aria-label="Next testimonial"
-            className="p-2 text-rb-muted hover:text-rb-navy transition-colors"
+            className="p-2 text-rb-muted hover:text-rb-black transition-colors"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

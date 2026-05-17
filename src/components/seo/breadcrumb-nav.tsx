@@ -27,11 +27,11 @@ export function BreadcrumbNav({ crumbs }: BreadcrumbNavProps) {
             <li key={crumb.href} className="flex items-center gap-2">
               {i > 0 && <span aria-hidden="true">/</span>}
               {i === crumbs.length - 1 ? (
-                <span className="text-rb-navy font-medium" aria-current="page">
+                <span className="text-rb-black font-medium" aria-current="page">
                   {crumb.name}
                 </span>
               ) : (
-                <Link href={crumb.href} className="hover:text-rb-navy transition-colors">
+                <Link href={crumb.href} className="hover:text-rb-black transition-colors">
                   {crumb.name}
                 </Link>
               )}

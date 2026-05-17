@@ -20,7 +20,7 @@ export function CartDrawer() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeCart}
-            className="fixed inset-0 bg-rb-ink/40 z-40"
+            className="fixed inset-0 bg-rb-black/40 z-40"
           />
           {/* Drawer */}
           <motion.div
@@ -28,14 +28,14 @@ export function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed right-0 top-0 h-full w-full max-w-md bg-rb-surface z-50 flex flex-col shadow-2xl"
+            className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-50 flex flex-col shadow-2xl"
           >
-            <div className="flex items-center justify-between p-6 border-b border-rb-border">
-              <h2 className="font-display text-xl font-semibold text-rb-navy">Your Cart</h2>
+            <div className="flex items-center justify-between p-6 border-b border-rb-card">
+              <h2 className="font-display text-xl font-bold text-rb-black uppercase">Your Cart</h2>
               <button
                 onClick={closeCart}
                 aria-label="Close cart"
-                className="p-2 text-rb-muted hover:text-rb-navy transition-colors"
+                className="p-2 text-rb-muted hover:text-rb-black transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -46,7 +46,7 @@ export function CartDrawer() {
                 <p className="text-rb-muted">Your cart is empty.</p>
                 <button
                   onClick={closeCart}
-                  className="text-sm underline text-rb-navy hover:text-rb-gold transition-colors"
+                  className="text-sm underline text-rb-black hover:text-rb-green transition-colors"
                 >
                   Keep shopping
                 </button>
@@ -58,10 +58,10 @@ export function CartDrawer() {
                     <CartLineItem key={line.id} line={line} />
                   ))}
                 </ul>
-                <div className="p-6 border-t border-rb-border space-y-4">
+                <div className="p-6 border-t border-rb-card space-y-4">
                   <div className="flex justify-between text-sm font-medium">
                     <span className="text-rb-muted">Subtotal</span>
-                    <span className="text-rb-navy">
+                    <span className="text-rb-black font-bold">
                       {formatMoney(
                         cart.cost.subtotalAmount.amount,
                         cart.cost.subtotalAmount.currencyCode
@@ -70,7 +70,8 @@ export function CartDrawer() {
                   </div>
                   <a
                     href={cart.checkoutUrl}
-                    className="block w-full bg-rb-navy text-rb-cream text-center py-4 font-medium hover:bg-rb-navy-light transition-colors rounded-sm"
+                    className="block w-full bg-rb-green text-white text-center py-4 font-bold hover:bg-rb-green-dark transition-colors rounded-[7px] uppercase text-sm"
+                    style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
                   >
                     Checkout
                   </a>
@@ -90,7 +91,7 @@ function CartLineItem({ line }: { line: ShopifyCartLine }) {
   return (
     <li className="flex gap-4">
       {image && (
-        <div className="w-16 h-16 relative flex-shrink-0 rounded overflow-hidden bg-rb-border">
+        <div className="w-16 h-16 relative flex-shrink-0 rounded-[8px] overflow-hidden bg-rb-card">
           <Image
             src={image.url}
             alt={image.altText ?? product.title}
@@ -101,9 +102,9 @@ function CartLineItem({ line }: { line: ShopifyCartLine }) {
         </div>
       )}
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-rb-navy truncate">{product.title}</p>
+        <p className="text-sm font-medium text-rb-black truncate">{product.title}</p>
         <p className="text-xs text-rb-muted">{line.merchandise.title}</p>
-        <p className="text-sm font-medium text-rb-navy mt-1">
+        <p className="text-sm font-bold text-rb-black mt-1">
           {formatMoney(line.cost.totalAmount.amount, line.cost.totalAmount.currencyCode)}
         </p>
       </div>

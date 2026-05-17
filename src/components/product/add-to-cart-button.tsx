@@ -18,7 +18,8 @@ export function AddToCartButton({ variantId, availableForSale }: AddToCartButton
     return (
       <button
         disabled
-        className="w-full py-4 bg-rb-border text-rb-muted font-medium cursor-not-allowed rounded-sm"
+        className="w-full py-4 bg-rb-card text-rb-ink font-medium cursor-not-allowed rounded-[7px] text-sm uppercase"
+        style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
       >
         Sold Out
       </button>
@@ -50,13 +51,14 @@ export function AddToCartButton({ variantId, availableForSale }: AddToCartButton
       onClick={handleAddToCart}
       disabled={loading}
       className={cn(
-        'w-full py-4 font-medium rounded-sm transition-colors',
+        'w-full py-4 font-bold rounded-[7px] transition-colors text-sm uppercase',
         loading
-          ? 'bg-rb-muted text-white cursor-wait'
-          : 'bg-rb-navy text-rb-cream hover:bg-rb-navy-light'
+          ? 'bg-rb-ink/50 text-white cursor-wait'
+          : 'bg-rb-green text-white hover:bg-rb-green-dark'
       )}
+      style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
     >
-      {loading ? 'Adding...' : 'Add to Cart'}
+      {loading ? 'Adding...' : 'ADD TO CART'}
     </button>
   )
 }

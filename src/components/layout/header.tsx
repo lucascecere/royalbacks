@@ -11,12 +11,10 @@ interface HeaderProps {
 }
 
 const B2C_NAV = [
-  { label: 'Collections', href: '/collections' },
-  { label: 'Originals', href: '/collections/originals' },
+  { label: 'Shop All', href: '/collections' },
+  { label: 'Best Sellers', href: '/collections/originals' },
   { label: 'Boston', href: '/collections/boston' },
-  { label: 'Local', href: '/collections/local' },
-  { label: 'Drops', href: '/collections/drops' },
-  { label: 'About', href: '/about' },
+  { label: 'About Us', href: '/about' },
 ]
 
 const B2B_NAV = [
@@ -31,97 +29,109 @@ export function Header({ mode }: HeaderProps) {
   const navItems = mode === 'b2c' ? B2C_NAV : B2B_NAV
 
   return (
-    <header className="bg-rb-navy sticky top-0 z-30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="font-display text-xl font-bold tracking-tight text-rb-cream hover:text-rb-gold transition-colors"
-          >
-            Royal Backs
-          </Link>
+    <>
+      {/* Skip to main content */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-rb-link focus:rounded-sm focus:outline-none focus:ring-2 focus:ring-rb-link text-sm"
+      >
+        Skip to Main Content
+      </a>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm text-rb-cream/80 hover:text-rb-cream transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Right side actions */}
-          <div className="flex items-center gap-2">
-            {mode === 'b2c' ? (
-              <CartIconButton />
-            ) : (
-              <Link
-                href="/embroidery/quote"
-                className="hidden md:block bg-rb-gold text-rb-navy text-sm font-medium px-4 py-2 rounded-sm hover:bg-rb-gold-light transition-colors"
-              >
-                Get a Quote
-              </Link>
-            )}
-
-            {/* Mobile menu toggle */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 text-rb-cream"
-              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+      <header className="bg-white sticky top-0 z-30 border-b border-rb-card">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <Link
+              href="/"
+              className="font-display text-xl font-bold tracking-tight text-rb-black uppercase hover:text-rb-green transition-colors"
             >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-        </div>
-      </div>
+              ROYAL BACKS
+            </Link>
 
-      {/* Mobile nav */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-white/10"
-          >
-            <nav className="px-4 py-4 flex flex-col gap-4" aria-label="Mobile navigation">
+            {/* Desktop nav */}
+            <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-rb-cream/90 hover:text-rb-cream py-1 text-base"
+                  className="text-sm text-rb-ink hover:text-rb-black transition-colors font-medium"
+                  style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
                 >
                   {item.label}
                 </Link>
               ))}
-              {mode === 'b2b' && (
+            </nav>
+
+            {/* Right side */}
+            <div className="flex items-center gap-3">
+              {mode === 'b2c' ? (
+                <CartIconButton />
+              ) : (
                 <Link
                   href="/embroidery/quote"
-                  onClick={() => setMobileOpen(false)}
-                  className="bg-rb-gold text-rb-navy text-center py-3 font-medium rounded-sm mt-2"
+                  className="hidden md:block bg-rb-green text-white text-sm font-bold px-5 py-2.5 rounded-[7px] hover:bg-rb-green-dark transition-colors uppercase"
+                  style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
                 >
                   Get a Quote
                 </Link>
               )}
-              {mode === 'b2c' && (
-                <Link
-                  href="/embroidery"
-                  onClick={() => setMobileOpen(false)}
-                  className="border border-rb-gold text-rb-gold text-center py-3 font-medium rounded-sm mt-2"
-                >
-                  Custom Embroidery
-                </Link>
-              )}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+
+              {/* Mobile menu toggle */}
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="md:hidden p-2 text-rb-black"
+                aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+              >
+                {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile nav */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden border-t border-rb-card bg-white"
+            >
+              <nav className="max-w-[1320px] mx-auto px-6 py-6 flex flex-col gap-4" aria-label="Mobile navigation">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="text-rb-ink hover:text-rb-black py-1 text-base font-medium"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                {mode === 'b2b' && (
+                  <Link
+                    href="/embroidery/quote"
+                    onClick={() => setMobileOpen(false)}
+                    className="bg-rb-green text-white text-center py-3 font-bold rounded-[7px] mt-2 uppercase text-sm"
+                  >
+                    Get a Quote
+                  </Link>
+                )}
+                {mode === 'b2c' && (
+                  <Link
+                    href="/embroidery"
+                    onClick={() => setMobileOpen(false)}
+                    className="border border-rb-green text-rb-green text-center py-3 font-medium rounded-[7px] mt-2 text-sm"
+                  >
+                    Custom Embroidery
+                  </Link>
+                )}
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+    </>
   )
 }

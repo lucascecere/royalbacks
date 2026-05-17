@@ -6,32 +6,22 @@ interface FooterProps {
 
 export function Footer({ showNap = false }: FooterProps) {
   return (
-    <footer className="bg-rb-navy text-rb-cream/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="md:col-span-1">
-            <Link href="/" className="font-display text-xl font-bold text-rb-cream block mb-3">
-              Royal Backs
-            </Link>
-            <p className="text-sm text-rb-cream/60 leading-relaxed">
-              Custom hats and embroidery from Milton, MA. Since 2017.
-            </p>
-          </div>
-
+    <footer className="bg-rb-black text-white">
+      <div className="max-w-[1320px] mx-auto px-6 lg:px-10 py-16 lg:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Shop */}
           <div>
-            <h3 className="text-sm font-semibold text-rb-cream mb-3 uppercase tracking-wider">Shop</h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-white mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>Shop</h3>
+            <ul className="space-y-3 text-sm">
               {[
-                { label: 'Originals', href: '/collections/originals' },
-                { label: 'Boston Collection', href: '/collections/boston' },
-                { label: 'Local Collection', href: '/collections/local' },
-                { label: 'Drops', href: '/collections/drops' },
-                { label: 'All Collections', href: '/collections' },
+                { label: 'All Products', href: '/collections' },
+                { label: 'Best Sellers', href: '/collections/originals' },
+                { label: 'RB', href: '/collections/originals' },
+                { label: 'Boston', href: '/collections/boston' },
+                { label: 'CLOVR', href: '/collections/local' },
               ].map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="hover:text-rb-cream transition-colors">
+                <li key={link.label}>
+                  <Link href={link.href} className="text-white/70 hover:text-white transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -41,10 +31,8 @@ export function Footer({ showNap = false }: FooterProps) {
 
           {/* Embroidery */}
           <div>
-            <h3 className="text-sm font-semibold text-rb-cream mb-3 uppercase tracking-wider">
-              Embroidery
-            </h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-white mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>Embroidery</h3>
+            <ul className="space-y-3 text-sm">
               {[
                 { label: 'Custom Embroidery', href: '/embroidery' },
                 { label: 'Get a Quote', href: '/embroidery/quote' },
@@ -53,7 +41,7 @@ export function Footer({ showNap = false }: FooterProps) {
                 { label: 'How It Works', href: '/embroidery/process' },
               ].map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-rb-cream transition-colors">
+                  <Link href={link.href} className="text-white/70 hover:text-white transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -61,43 +49,77 @@ export function Footer({ showNap = false }: FooterProps) {
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Policies */}
           <div>
-            <h3 className="text-sm font-semibold text-rb-cream mb-3 uppercase tracking-wider">
-              Company
-            </h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-white mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>Policies</h3>
+            <ul className="space-y-3 text-sm">
               {[
-                { label: 'About', href: '/about' },
-                { label: 'Blog', href: '/blog' },
+                { label: 'Terms & Conditions', href: '/policies/terms' },
+                { label: 'Privacy Policy', href: '/policies/privacy' },
+                { label: 'Shipping & Returns', href: '/policies/shipping' },
+                { label: 'Accessibility', href: '/policies/accessibility' },
               ].map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-rb-cream transition-colors">
+                  <Link href={link.href} className="text-white/70 hover:text-white transition-colors">
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            {showNap && (
-              <address className="not-italic mt-4 text-sm text-rb-cream/60 space-y-1">
-                <p>Milton, MA 02186</p>
-                <p>
-                  <a
-                    href="mailto:info@royalbacks.com"
-                    className="hover:text-rb-cream transition-colors"
-                  >
-                    info@royalbacks.com
-                  </a>
-                </p>
-                <p className="text-xs mt-2">Embroidering since 2017</p>
-              </address>
-            )}
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-white mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>Contact</h3>
+            <address className="not-italic text-sm text-white/70 space-y-2">
+              <p>Proudly based in</p>
+              <p className="text-white font-medium">Milton, MA 02186</p>
+              <p>
+                <a href="mailto:info@royalbacks.com" className="hover:text-white transition-colors">
+                  info@royalbacks.com
+                </a>
+              </p>
+              <div className="pt-2 space-y-2">
+                <p className="text-xs uppercase tracking-widest font-bold text-white">Social</p>
+                <p><a href="#" className="hover:text-white transition-colors">Instagram</a></p>
+                <p><a href="#" className="hover:text-white transition-colors">Facebook</a></p>
+                <p><a href="#" className="hover:text-white transition-colors">TikTok</a></p>
+              </div>
+            </address>
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-white mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>Stay in the Loop</h3>
+            <p className="text-sm text-white/70 mb-4 leading-relaxed">
+              New drops, restocks, and local events. No spam.
+            </p>
+            <form className="flex flex-col gap-3">
+              <input
+                type="email"
+                placeholder="your@email.com"
+                className="w-full bg-transparent border-b border-white/30 py-2 text-sm text-white placeholder-white/40 focus:outline-none focus:border-white transition-colors"
+                aria-label="Email address for newsletter"
+              />
+              <div className="flex items-start gap-2 text-xs text-white/50">
+                <input type="checkbox" id="footer-consent" className="mt-0.5 accent-rb-green" />
+                <label htmlFor="footer-consent">I agree to receive emails from Royal Backs.</label>
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-rb-green text-white font-bold text-sm py-3 rounded-[7px] uppercase hover:bg-rb-green-dark transition-colors"
+                style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
+              >
+                Sign Up
+              </button>
+            </form>
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row justify-between gap-4 text-xs text-rb-cream/40">
-          <p>&copy; {new Date().getFullYear()} Royal Backs. All rights reserved.</p>
-          <p>Milton, Massachusetts</p>
+        {/* Bottom bar */}
+        <div className="border-t border-white/10 mt-14 pt-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-white/40">
+          <p>&copy; {new Date().getFullYear()} RoyalBacks LLC. All rights reserved.</p>
+          <p>Made by <span className="text-white/60">TETRA MEDIA</span></p>
         </div>
       </div>
     </footer>

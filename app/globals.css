@@ -3,41 +3,49 @@
 
 @theme {
   /* Brand Colors */
-  --color-rb-navy: #0A1628;
-  --color-rb-navy-light: #132035;
-  --color-rb-cream: #F5F1E8;
-  --color-rb-gold: #C4963A;
-  --color-rb-gold-light: #D4A84A;
-  --color-rb-ink: #111111;
+  --color-rb-black: #000000;
+  --color-rb-white: #FFFFFF;
+  --color-rb-green: #027F3F;
+  --color-rb-green-dark: #025C2E;
+  --color-rb-ink: #282828;
+  --color-rb-card: #F0F0F0;
+  --color-rb-sand: #D9B179;
+  --color-rb-link: #116DFF;
+
+  /* Legacy aliases (components still reference these — update them too) */
+  --color-rb-navy: #000000;
+  --color-rb-cream: #FFFFFF;
+  --color-rb-gold: #027F3F;
+  --color-rb-gold-light: #025C2E;
   --color-rb-muted: #6B6E7A;
-  --color-rb-surface: #F8F7F4;
-  --color-rb-border: #E8E4DC;
+  --color-rb-surface: #F5F5F5;
+  --color-rb-border: #E0E0E0;
 
   /* Typography */
-  --font-display: var(--font-fraunces);
+  --font-display: var(--font-space-grotesk);
   --font-sans: var(--font-inter);
 
   /* Radii */
-  --radius-sm: 4px;
-  --radius-md: 8px;
+  --radius-sm: 7px;
+  --radius-md: 12px;
   --radius-lg: 16px;
   --radius-full: 9999px;
 }
 
 body {
-  font-family: var(--font-inter), system-ui, sans-serif;
-  background-color: #F8F7F4;
-  color: #111111;
+  font-family: var(--font-inter), 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+  background-color: #FFFFFF;
+  color: #000000;
 }
 
 .font-display {
-  font-family: var(--font-fraunces), Georgia, serif;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
 }
 
 /* Prose customization for MDX content */
 .prose {
-  --tw-prose-body: #111111;
-  --tw-prose-headings: #0A1628;
-  --tw-prose-links: #C4963A;
-  --tw-prose-bold: #0A1628;
+  --tw-prose-body: #282828;
+  --tw-prose-headings: #000000;
+  --tw-prose-links: #027F3F;
+  --tw-prose-bold: #000000;
 }

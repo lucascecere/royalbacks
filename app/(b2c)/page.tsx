@@ -5,7 +5,7 @@ import { getActiveDrop } from '@/src/services/drops'
 import { getCollectionByHandle } from '@/src/services/collections'
 import { buildMetadata } from '@/src/lib/seo'
 import { ProductCard } from '@/src/components/product/product-card'
-import { DropBadge } from '@/src/components/product/drop-badge'
+import { MarqueeBar } from '@/src/components/ui/marquee-bar'
 
 export const revalidate = 900
 
@@ -15,24 +15,42 @@ export const metadata: Metadata = buildMetadata({
     'Shop limited-run hats, Boston collections, and local South Shore designs. Custom embroidery also available for teams and businesses.',
 })
 
-const CORE_COLLECTIONS = [
+const COLLECTIONS = [
   {
-    handle: 'originals',
-    title: 'Originals',
-    description: 'Our signature line — classic silhouettes, elevated details.',
+    handle: 'rb',
+    label: 'RB',
     href: '/collections/originals',
+    description: 'The original line.',
   },
   {
     handle: 'boston',
-    title: 'Boston',
-    description: 'For the city. Hats that know where they came from.',
+    label: 'BOSTON',
     href: '/collections/boston',
+    description: 'For the city.',
   },
   {
-    handle: 'local',
-    title: 'Local',
-    description: 'South Shore towns. Your place, on your head.',
+    handle: 'clovr',
+    label: 'CLOVR',
     href: '/collections/local',
+    description: 'Built for the South Shore.',
+  },
+]
+
+const TESTIMONIALS = [
+  {
+    headline: '"Eco-Friendly and Stylish"',
+    body: 'The quality is outstanding and the sustainability story is real. These are hats I feel good wearing.',
+    author: 'James M.',
+  },
+  {
+    headline: '"Ideal for Active Lifestyles"',
+    body: 'Wore mine all summer — hiking, beach, city. Held up perfectly and still looks great.',
+    author: 'Rebecca T.',
+  },
+  {
+    headline: '"My New Daily Essential"',
+    body: "Found Royal Backs through a friend in Milton. Now I own three. Can't recommend enough.",
+    author: 'Sophia N.',
   },
 ]
 
@@ -43,58 +61,70 @@ export default async function HomePage() {
   ])
 
   const featuredProducts = originalsCollection?.products.slice(0, 4) ?? []
+  const heroProduct = featuredProducts[0] ?? null
 
   return (
     <>
+      {/* Announcement marquee */}
+      <MarqueeBar items={['FREE SHIPPING ON ALL ORDERS $50+']} separator="✸" />
+
       {/* Hero */}
-      <section className="bg-rb-navy text-rb-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 lg:py-28">
-          {activeDrop ? (
-            <div className="max-w-2xl">
-              <div className="mb-4">
-                <DropBadge status={activeDrop.status} />
-              </div>
-              <h1 className="font-display text-5xl lg:text-7xl font-bold leading-tight mb-6">
-                {activeDrop.title}
-              </h1>
-              <p className="text-rb-cream/70 text-lg mb-8">
-                Limited release. Once it&apos;s gone, it&apos;s gone.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+      <section className="relative bg-rb-card min-h-[80vh] flex items-end overflow-hidden">
+        {/* Background placeholder — replace with real lifestyle photo via next/image */}
+        <div className="absolute inset-0 bg-gradient-to-br from-rb-card via-white to-rb-card" />
+
+        <div className="relative max-w-[1320px] mx-auto px-6 lg:px-10 w-full py-16 lg:py-24">
+          <div className="max-w-[600px]">
+            <h1
+              className="font-display font-bold text-rb-black uppercase mb-4 leading-[0.9] tracking-[-0.03em]"
+              style={{ fontSize: 'clamp(40px, 6vw, 85px)' }}
+            >
+              WALKING WITH
+              <br />
+              PURPOSE.
+            </h1>
+            <p
+              className="text-rb-ink font-bold mb-8 text-lg"
+              style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
+            >
+              Custom Embroidery for apparel &amp; accessories
+            </p>
+            <Link
+              href="/collections"
+              className="inline-block bg-rb-green text-white font-bold text-sm px-6 py-3 rounded-[7px] hover:bg-rb-green-dark transition-colors uppercase"
+              style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
+            >
+              Shop Now
+            </Link>
+          </div>
+
+          {/* Floating featured product card */}
+          {heroProduct && (
+            <div className="absolute bottom-8 right-6 lg:right-10 w-56 bg-white rounded-[12px] shadow-xl overflow-hidden">
+              {heroProduct.featuredImage && (
+                <div className="relative aspect-square">
+                  <span className="absolute top-2 left-2 z-10 bg-rb-green text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">
+                    <span aria-hidden="true">Best Seller</span>
+                  </span>
+                  <Image
+                    src={heroProduct.featuredImage.url}
+                    alt={heroProduct.featuredImage.altText ?? heroProduct.title}
+                    fill
+                    className="object-cover"
+                    sizes="224px"
+                  />
+                </div>
+              )}
+              <div className="p-3">
+                <p className="text-xs text-rb-ink font-medium truncate">{heroProduct.title}</p>
+                <p className="text-xs text-rb-green font-bold mt-0.5">
+                  ${heroProduct.priceRange.minVariantPrice.amount}
+                </p>
                 <Link
-                  href={`/collections/drops/${activeDrop.handle}`}
-                  className="inline-block bg-rb-gold text-rb-navy font-semibold px-8 py-4 rounded-sm hover:bg-rb-gold-light transition-colors text-center"
+                  href={`/products/${heroProduct.handle}`}
+                  className="block mt-2 bg-rb-green text-white text-[11px] font-bold text-center py-1.5 rounded-[7px] uppercase hover:bg-rb-green-dark transition-colors"
                 >
-                  Shop the Drop
-                </Link>
-                <Link
-                  href="/collections"
-                  className="inline-block border border-rb-cream/30 text-rb-cream font-medium px-8 py-4 rounded-sm hover:border-rb-cream transition-colors text-center"
-                >
-                  All Collections
-                </Link>
-              </div>
-            </div>
-          ) : (
-            <div className="max-w-2xl">
-              <h1 className="font-display text-5xl lg:text-7xl font-bold leading-tight mb-6">
-                Hats worth wearing.
-              </h1>
-              <p className="text-rb-cream/70 text-lg mb-8">
-                Small-batch headwear made with care, from Milton, MA. Every stitch earns its place.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/collections/originals"
-                  className="inline-block bg-rb-gold text-rb-navy font-semibold px-8 py-4 rounded-sm hover:bg-rb-gold-light transition-colors text-center"
-                >
-                  Shop Originals
-                </Link>
-                <Link
-                  href="/collections"
-                  className="inline-block border border-rb-cream/30 text-rb-cream font-medium px-8 py-4 rounded-sm hover:border-rb-cream transition-colors text-center"
-                >
-                  All Collections
+                  Add to Cart
                 </Link>
               </div>
             </div>
@@ -102,68 +132,158 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Collections */}
-      <section className="bg-rb-surface py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <h2 className="font-display text-3xl font-bold text-rb-navy mb-10">Collections</h2>
-          <div className="grid sm:grid-cols-3 gap-6">
-            {CORE_COLLECTIONS.map((col) => (
-              <Link
-                key={col.handle}
-                href={col.href}
-                className="group block bg-white border border-rb-border rounded-sm p-6 hover:border-rb-navy hover:shadow-md transition-all"
-              >
-                <h3 className="font-display text-xl font-semibold text-rb-navy mb-2 group-hover:text-rb-gold transition-colors">
-                  {col.title}
-                </h3>
-                <p className="text-sm text-rb-muted leading-relaxed mb-4">{col.description}</p>
-                <span className="text-sm font-medium text-rb-navy group-hover:text-rb-gold transition-colors">
-                  Shop {col.title} &rarr;
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products */}
+      {/* Best Sellers */}
       {featuredProducts.length > 0 && (
         <section className="bg-white py-16 lg:py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="flex items-end justify-between mb-10">
-              <h2 className="font-display text-3xl font-bold text-rb-navy">Featured</h2>
-              <Link
-                href="/collections/originals"
-                className="text-sm text-rb-muted hover:text-rb-navy transition-colors"
+          <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
+            <div className="flex items-center justify-between mb-8">
+              <h2
+                className="font-display text-[26px] font-normal text-rb-black uppercase"
               >
-                View all &rarr;
+                OUR BEST SELLERS
+              </h2>
+              <Link
+                href="/collections"
+                className="text-sm font-bold text-rb-ink hover:text-rb-black transition-colors"
+                style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
+              >
+                VIEW ALL →
               </Link>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
               {featuredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} product={product} showBestSellerBadge />
               ))}
             </div>
           </div>
         </section>
       )}
 
-      {/* B2B CTA Banner */}
-      <section className="bg-rb-navy text-rb-cream py-14">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-rb-gold text-sm font-semibold uppercase tracking-widest mb-3">
+      {/* Promo split */}
+      <section className="bg-white py-16 lg:py-20 border-t border-rb-card">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2
+                className="font-display font-normal text-rb-black uppercase leading-[1.0] tracking-[-0.03em] mb-4"
+                style={{ fontSize: 'clamp(32px, 4vw, 58px)' }}
+              >
+                ROYALBACKS<br />20% OFF SALE
+              </h2>
+              <p className="text-rb-ink text-base mb-6" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                Exclusive, one-time offer.
+              </p>
+              <Link
+                href="/collections"
+                className="inline-block border border-rb-black text-rb-black font-bold text-sm px-6 py-3 rounded-[7px] hover:bg-rb-black hover:text-white transition-colors uppercase"
+                style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
+              >
+                SHOP NOW
+              </Link>
+            </div>
+            <div className="aspect-[4/3] bg-rb-card rounded-[12px] overflow-hidden" />
+          </div>
+        </div>
+      </section>
+
+      {/* Second marquee */}
+      <MarqueeBar items={['LIMITED EDITION, FRESHLY ARRIVED']} separator="✶" />
+
+      {/* Shop by Collection */}
+      <section className="bg-white py-16 lg:py-20">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="font-display text-[26px] font-normal text-rb-black uppercase">
+              SHOP BY COLLECTION
+            </h2>
+            <Link
+              href="/collections"
+              className="text-sm font-bold text-rb-ink hover:text-rb-black transition-colors"
+              style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
+            >
+              VIEW ALL →
+            </Link>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-4 sm:gap-6">
+            {COLLECTIONS.map((col) => (
+              <Link
+                key={col.handle}
+                href={col.href}
+                className="group relative aspect-square bg-rb-card rounded-[12px] overflow-hidden hover:scale-[1.02] transition-transform duration-400"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+                <div className="absolute bottom-4 right-4 flex items-center gap-1 text-rb-ink font-bold text-sm" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                  {col.label} <span>→</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sustainability story block */}
+      <section className="py-16 lg:py-24" style={{ backgroundColor: '#D9B179' }}>
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2
+                className="font-display font-bold text-rb-ink uppercase leading-[0.9] tracking-[-0.03em] mb-6"
+                style={{ fontSize: 'clamp(36px, 5vw, 85px)' }}
+              >
+                STEP INTO SUSTAINABILITY
+              </h2>
+              <p className="text-rb-ink text-base leading-relaxed max-w-md" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                Every Royal Backs hat is made to last. We use quality materials, thoughtful construction, and a production process that respects where we come from — Milton, MA.
+              </p>
+            </div>
+            <div className="aspect-[4/3] bg-[#C9A469] rounded-[12px] overflow-hidden" />
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="bg-white py-16 lg:py-20">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
+          <h2 className="font-display text-[26px] font-normal text-rb-black uppercase mb-8">
+            WHAT ROYALBACKS CUSTOMERS HAVE TO SAY
+          </h2>
+          <div className="grid sm:grid-cols-3 gap-4 sm:gap-6">
+            {TESTIMONIALS.map((t) => (
+              <div key={t.author} className="bg-rb-card rounded-[12px] p-8">
+                <p className="font-display text-rb-green font-bold text-lg mb-3 leading-tight">
+                  {t.headline}
+                </p>
+                <p className="text-rb-ink text-sm leading-relaxed mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                  {t.body}
+                </p>
+                <p className="text-xs font-bold text-rb-ink uppercase tracking-widest" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                  — {t.author}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* B2B Embroidery CTA */}
+      <section className="bg-rb-black text-white py-16 lg:py-20">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-10 text-center">
+          <p className="text-xs font-bold uppercase tracking-widest text-rb-green mb-3" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
             For Teams &amp; Businesses
           </p>
-          <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
-            Need custom embroidery?
+          <h2
+            className="font-display font-bold text-white uppercase leading-[0.9] tracking-[-0.03em] mb-4"
+            style={{ fontSize: 'clamp(32px, 4vw, 64px)' }}
+          >
+            NEED CUSTOM EMBROIDERY?
           </h2>
-          <p className="text-rb-cream/70 text-lg max-w-xl mx-auto mb-8">
-            We&apos;ve been doing this since 2017. Hats, polos, jackets, bags — anything with a
-            surface we can stitch. Local pickup in Milton. Quick turnaround.
+          <p className="text-white/70 text-base max-w-xl mx-auto mb-8" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+            We&apos;ve been doing this since 2017. Hats, polos, jackets, bags — anything with a surface we can stitch. Local pickup in Milton.
           </p>
           <Link
             href="/embroidery"
-            className="inline-block bg-rb-gold text-rb-navy font-semibold px-8 py-4 rounded-sm hover:bg-rb-gold-light transition-colors"
+            className="inline-block bg-rb-green text-white font-bold text-sm px-8 py-4 rounded-[7px] hover:bg-rb-green-dark transition-colors uppercase"
+            style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
           >
             Explore Embroidery Services
           </Link>
