@@ -65,9 +65,6 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Announcement marquee */}
-      <MarqueeBar items={['FREE SHIPPING ON ALL ORDERS $50+']} separator="✸" />
-
       {/* Hero */}
       <section className="relative bg-rb-card min-h-[80vh] flex items-end overflow-hidden">
         {/* Background placeholder — replace with real lifestyle photo via next/image */}
