@@ -1,26 +1,43 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Brand Colors */
+  --color-rb-navy: #0A1628;
+  --color-rb-navy-light: #132035;
+  --color-rb-cream: #F5F1E8;
+  --color-rb-gold: #C4963A;
+  --color-rb-gold-light: #D4A84A;
+  --color-rb-ink: #111111;
+  --color-rb-muted: #6B6E7A;
+  --color-rb-surface: #F8F7F4;
+  --color-rb-border: #E8E4DC;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Typography */
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  background-color: #F8F7F4;
+  color: #111111;
+}
+
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
+/* Prose customization for MDX content */
+.prose {
+  --tw-prose-body: #111111;
+  --tw-prose-headings: #0A1628;
+  --tw-prose-links: #C4963A;
+  --tw-prose-bold: #0A1628;
 }
