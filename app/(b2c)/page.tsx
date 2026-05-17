@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { getActiveDrop } from '@/src/services/drops'
 import { getCollectionByHandle } from '@/src/services/collections'
 import { buildMetadata } from '@/src/lib/seo'
 import { ProductCard } from '@/src/components/product/product-card'
 import { MarqueeBar } from '@/src/components/ui/marquee-bar'
+import { HeroCarousel } from '@/src/components/ui/hero-carousel'
 
 export const revalidate = 900
 
@@ -61,73 +61,11 @@ export default async function HomePage() {
   ])
 
   const featuredProducts = originalsCollection?.products.slice(0, 4) ?? []
-  const heroProduct = featuredProducts[0] ?? null
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-rb-card min-h-[80vh] flex items-end overflow-hidden">
-        {/* Background placeholder — replace with real lifestyle photo via next/image */}
-        <div className="absolute inset-0 bg-gradient-to-br from-rb-card via-white to-rb-card" />
-
-        <div className="relative max-w-[1320px] mx-auto px-6 lg:px-10 w-full py-16 lg:py-24">
-          <div className="max-w-[600px]">
-            <h1
-              className="font-display font-bold text-rb-black uppercase mb-4 leading-[0.9] tracking-[-0.03em]"
-              style={{ fontSize: 'clamp(40px, 6vw, 85px)' }}
-            >
-              WALKING WITH
-              <br />
-              PURPOSE.
-            </h1>
-            <p
-              className="text-rb-ink font-bold mb-8 text-lg"
-              style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
-            >
-              Custom Embroidery for apparel &amp; accessories
-            </p>
-            <Link
-              href="/collections"
-              className="inline-block bg-rb-green text-white font-bold text-sm px-6 py-3 rounded-[7px] hover:bg-rb-green-dark transition-colors uppercase"
-              style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
-            >
-              Shop Now
-            </Link>
-          </div>
-
-          {/* Floating featured product card */}
-          {heroProduct && (
-            <div className="absolute bottom-8 right-6 lg:right-10 w-56 bg-white rounded-[12px] shadow-xl overflow-hidden">
-              {heroProduct.featuredImage && (
-                <div className="relative aspect-square">
-                  <span className="absolute top-2 left-2 z-10 bg-rb-green text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">
-                    <span aria-hidden="true">Best Seller</span>
-                  </span>
-                  <Image
-                    src={heroProduct.featuredImage.url}
-                    alt={heroProduct.featuredImage.altText ?? heroProduct.title}
-                    fill
-                    className="object-cover"
-                    sizes="224px"
-                  />
-                </div>
-              )}
-              <div className="p-3">
-                <p className="text-xs text-rb-ink font-medium truncate">{heroProduct.title}</p>
-                <p className="text-xs text-rb-green font-bold mt-0.5">
-                  ${heroProduct.priceRange.minVariantPrice.amount}
-                </p>
-                <Link
-                  href={`/products/${heroProduct.handle}`}
-                  className="block mt-2 bg-rb-green text-white text-[11px] font-bold text-center py-1.5 rounded-[7px] uppercase hover:bg-rb-green-dark transition-colors"
-                >
-                  Add to Cart
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
+      {/* Hero carousel */}
+      <HeroCarousel />
 
       {/* Best Sellers */}
       {featuredProducts.length > 0 && (
