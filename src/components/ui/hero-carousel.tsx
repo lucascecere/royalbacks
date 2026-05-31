@@ -18,7 +18,7 @@ interface HeroSlide {
 const SLIDES: HeroSlide[] = [
   {
     id: 'purpose',
-    image: '/Gemini_Generated_Image_xkuzq9xkuzq9xkuz.png',
+    image: '/rb hero section.jpeg',
     bgColor: '#2C3A2C',
     headline: ['WALKING WITH', 'PURPOSE.'],
     sub: 'Custom embroidery for apparel & accessories',
