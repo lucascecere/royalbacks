@@ -18,8 +18,8 @@ interface HeroSlide {
 const SLIDES: HeroSlide[] = [
   {
     id: 'purpose',
-    image: '/brand/RB Hero Photo.webp',
-    bgColor: '#5B7A8A',
+    image: '/Gemini_Generated_Image_xkuzq9xkuzq9xkuz.png',
+    bgColor: '#2C3A2C',
     headline: ['WALKING WITH', 'PURPOSE.'],
     sub: 'Custom embroidery for apparel & accessories',
     ctaLabel: 'Shop Now',
