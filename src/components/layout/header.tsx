@@ -39,28 +39,38 @@ export function Header({ mode }: HeaderProps) {
         Skip to Main Content
       </a>
 
-      <header className="bg-white sticky top-0 z-30 border-b border-rb-card overflow-hidden">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
-          <div className="flex items-center justify-between h-20">
+      {/* Floating pill nav — fixed, transparent outer, rounded inner bar */}
+      <header className="fixed top-4 left-0 right-0 z-40 px-4 lg:px-8 pointer-events-none">
+        <div className="max-w-[1320px] mx-auto">
+          <div
+            className="flex items-center justify-between h-16 px-5 lg:px-7 rounded-2xl pointer-events-auto"
+            style={{
+              background: 'rgba(255, 255, 255, 0.88)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              boxShadow: '0 2px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)',
+              border: '1px solid rgba(255,255,255,0.6)',
+            }}
+          >
             {/* Logo */}
             <Link href="/" className="flex-shrink-0">
               <Image
                 src="/brand/royalbacks logo.webp"
                 alt="Royal Backs"
-                width={280}
-                height={112}
-                className="h-24 w-auto object-contain mix-blend-multiply"
+                width={200}
+                height={80}
+                className="h-14 w-auto object-contain mix-blend-multiply"
                 priority
               />
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+            <nav className="hidden md:flex items-center gap-7" aria-label="Main navigation">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-sm text-rb-ink hover:text-rb-black transition-colors font-medium"
+                  className="text-sm font-medium text-rb-ink hover:text-rb-black transition-colors"
                   style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
                 >
                   {item.label}
@@ -75,7 +85,7 @@ export function Header({ mode }: HeaderProps) {
               ) : (
                 <Link
                   href="/embroidery/quote"
-                  className="hidden md:block bg-rb-green text-white text-sm font-bold px-5 py-2.5 rounded-[7px] hover:bg-rb-green-dark transition-colors uppercase"
+                  className="hidden md:block bg-rb-green text-white text-sm font-bold px-5 py-2 rounded-[7px] hover:bg-rb-green-dark transition-colors uppercase"
                   style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
                 >
                   Get a Quote
@@ -85,57 +95,65 @@ export function Header({ mode }: HeaderProps) {
               {/* Mobile menu toggle */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden p-2 text-rb-black"
+                className="md:hidden p-1.5 text-rb-black"
                 aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               >
                 {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           </div>
-        </div>
 
-        {/* Mobile nav */}
-        <AnimatePresence>
-          {mobileOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden border-t border-rb-card bg-white"
-            >
-              <nav className="max-w-[1320px] mx-auto px-6 py-6 flex flex-col gap-4" aria-label="Mobile navigation">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="text-rb-ink hover:text-rb-black py-1 text-base font-medium"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-                {mode === 'b2b' && (
-                  <Link
-                    href="/embroidery/quote"
-                    onClick={() => setMobileOpen(false)}
-                    className="bg-rb-green text-white text-center py-3 font-bold rounded-[7px] mt-2 uppercase text-sm"
-                  >
-                    Get a Quote
-                  </Link>
-                )}
-                {mode === 'b2c' && (
-                  <Link
-                    href="/embroidery"
-                    onClick={() => setMobileOpen(false)}
-                    className="border border-rb-green text-rb-green text-center py-3 font-medium rounded-[7px] mt-2 text-sm"
-                  >
-                    Custom Embroidery
-                  </Link>
-                )}
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          {/* Mobile dropdown — extends below the pill */}
+          <AnimatePresence>
+            {mobileOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+                className="mt-2 rounded-2xl overflow-hidden pointer-events-auto"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+                  border: '1px solid rgba(255,255,255,0.6)',
+                }}
+              >
+                <nav className="px-5 py-5 flex flex-col gap-4" aria-label="Mobile navigation">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="text-rb-ink hover:text-rb-black py-1 text-base font-medium"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                  {mode === 'b2b' && (
+                    <Link
+                      href="/embroidery/quote"
+                      onClick={() => setMobileOpen(false)}
+                      className="bg-rb-green text-white text-center py-3 font-bold rounded-[7px] mt-1 uppercase text-sm"
+                    >
+                      Get a Quote
+                    </Link>
+                  )}
+                  {mode === 'b2c' && (
+                    <Link
+                      href="/embroidery"
+                      onClick={() => setMobileOpen(false)}
+                      className="border border-rb-green text-rb-green text-center py-3 font-medium rounded-[7px] mt-1 text-sm"
+                    >
+                      Custom Embroidery
+                    </Link>
+                  )}
+                </nav>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </header>
     </>
   )

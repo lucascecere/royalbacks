@@ -91,7 +91,7 @@ export function HeroCarousel() {
 
   return (
     <section
-      className="relative min-h-[85vh] overflow-hidden"
+      className="relative min-h-screen overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -113,8 +113,10 @@ export function HeroCarousel() {
               src={slide.image}
               alt={slide.headline.join(' ')}
               fill
-              className="object-cover"
+              className="object-cover object-center scale-[0.85] origin-center"
+              style={{ imageRendering: 'auto', filter: 'contrast(1.08) saturate(1.1) brightness(0.95)' }}
               sizes="100vw"
+              quality={100}
               priority={index === 0}
             />
           )}
@@ -126,7 +128,7 @@ export function HeroCarousel() {
       </AnimatePresence>
 
       {/* Text content — stays above slides */}
-      <div className="relative z-10 min-h-[85vh] flex items-end">
+      <div className="relative z-10 min-h-screen flex items-end">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10 w-full py-16 lg:py-24">
           <AnimatePresence mode="wait">
             <motion.div
