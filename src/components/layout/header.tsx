@@ -40,7 +40,7 @@ export function Header({ mode }: HeaderProps) {
       </a>
 
       {/* Floating pill nav — fixed, transparent outer, rounded inner bar */}
-      <header className="fixed top-12 left-0 right-0 z-40 px-4 lg:px-8 pointer-events-none">
+      <header className="fixed top-16 left-0 right-0 z-40 px-4 lg:px-8 pointer-events-none">
         <div className="max-w-[1320px] mx-auto">
           <div
             className="flex items-center justify-between h-16 px-5 lg:px-7 rounded-2xl pointer-events-auto"
