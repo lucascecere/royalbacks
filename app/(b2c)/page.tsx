@@ -21,7 +21,7 @@ const COLLECTIONS = [
     handle: 'rb',
     label: 'RB',
     href: '/collections/originals',
-    image: null,
+    image: '/Gemini_Generated_Image_47gce247gce247gc.png',
   },
   {
     handle: 'boston',
