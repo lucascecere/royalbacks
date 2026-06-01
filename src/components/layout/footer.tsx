@@ -102,15 +102,11 @@ export function Footer({ showNap = false }: FooterProps) {
           <div className="flex items-center gap-6">
             <Link href="/">
               <Image
-                src="/brand/royalbacks logo 2.jpeg"
+                src="/0c785f29-43a4-4016-8ae7-3326f301c461.png"
                 alt="Royal Backs"
                 width={80}
                 height={80}
-                className="h-16 w-auto object-contain hover:opacity-100 transition-opacity"
-                style={{
-                  filter: 'invert(1) hue-rotate(180deg) contrast(2) saturate(3) brightness(1.1)',
-                  mixBlendMode: 'screen',
-                }}
+                className="h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
               />
             </Link>
             <p>&copy; {new Date().getFullYear()} RoyalBacks LLC. All rights reserved.</p>
