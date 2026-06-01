@@ -50,16 +50,17 @@ export function Header({ mode }: HeaderProps) {
               border: '1px solid #EFEFEF',
             }}
           >
-            {/* Logo */}
+            {/* Logo — cropped to text area, background blended out */}
             <Link href="/" className="flex-shrink-0">
-              <Image
-                src="/brand/royalbacks logo.webp"
-                alt="Royal Backs"
-                width={200}
-                height={80}
-                className="h-14 w-auto object-contain mix-blend-multiply"
-                priority
-              />
+              <div className="relative overflow-hidden" style={{ width: 180, height: 72 }}>
+                <Image
+                  src="/brand/royalbacks logo.webp"
+                  alt="Royal Backs"
+                  fill
+                  className="object-cover object-bottom mix-blend-multiply"
+                  priority
+                />
+              </div>
             </Link>
 
             {/* Desktop nav */}
