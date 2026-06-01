@@ -40,16 +40,14 @@ export function Header({ mode }: HeaderProps) {
       </a>
 
       {/* Floating pill nav — fixed, transparent outer, rounded inner bar */}
-      <header className="fixed top-4 left-0 right-0 z-40 px-4 lg:px-8 pointer-events-none">
+      <header className="fixed top-12 left-0 right-0 z-40 px-4 lg:px-8 pointer-events-none">
         <div className="max-w-[1320px] mx-auto">
           <div
             className="flex items-center justify-between h-16 px-5 lg:px-7 rounded-2xl pointer-events-auto"
             style={{
-              background: 'rgba(255, 255, 255, 0.88)',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
+              background: '#FFFFFF',
               boxShadow: '0 2px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)',
-              border: '1px solid rgba(255,255,255,0.6)',
+              border: '1px solid #EFEFEF',
             }}
           >
             {/* Logo */}
@@ -113,11 +111,9 @@ export function Header({ mode }: HeaderProps) {
                 transition={{ duration: 0.2, ease: 'easeOut' }}
                 className="mt-2 rounded-2xl overflow-hidden pointer-events-auto"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.95)',
-                  backdropFilter: 'blur(16px)',
-                  WebkitBackdropFilter: 'blur(16px)',
+                  background: '#FFFFFF',
                   boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
-                  border: '1px solid rgba(255,255,255,0.6)',
+                  border: '1px solid #EFEFEF',
                 }}
               >
                 <nav className="px-5 py-5 flex flex-col gap-4" aria-label="Mobile navigation">

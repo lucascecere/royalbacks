@@ -113,8 +113,8 @@ export function HeroCarousel() {
               src={slide.image}
               alt={slide.headline.join(' ')}
               fill
-              className="object-cover object-center scale-[0.85] origin-center"
-              style={{ imageRendering: 'auto', filter: 'contrast(1.08) saturate(1.1) brightness(0.95)' }}
+              className="object-cover object-center"
+              style={{ filter: 'contrast(1.08) saturate(1.1) brightness(0.95)' }}
               sizes="100vw"
               quality={100}
               priority={index === 0}

@@ -7,7 +7,9 @@ import { MarqueeBar } from '@/src/components/ui/marquee-bar'
 export default function B2CLayout({ children }: { children: React.ReactNode }) {
   return (
     <CartProvider>
-      <MarqueeBar items={['FREE SHIPPING ON ALL ORDERS $50+']} separator="✸" />
+      {/* Marquee fixed at very top */}
+      <MarqueeBar items={['FREE SHIPPING ON ALL ORDERS $50+']} separator="✸" className="fixed top-0 left-0 right-0 z-50" />
+      {/* Pill nav floats below marquee */}
       <Header mode="b2c" />
       <CartDrawer />
       <main>{children}</main>
