@@ -188,7 +188,7 @@ export default async function HomePage() {
             </div>
             <div className="aspect-[4/3] rounded-[12px] overflow-hidden relative">
               <Image
-                src="/0c785f29-43a4-4016-8ae7-3326f301c461.png"
+                src="/17055803596131524641.png"
                 alt="Royal Backs"
                 fill
                 className="object-cover"
