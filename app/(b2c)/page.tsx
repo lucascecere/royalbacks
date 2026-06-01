@@ -186,7 +186,15 @@ export default async function HomePage() {
                 Royal Backs started in Milton and never left. Every hat is built to be worn — not just bought. Whether it&apos;s a cap off the shelf or a custom stitch job for your team, we put the same care into every order.
               </p>
             </div>
-            <div className="aspect-[4/3] bg-rb-ink rounded-[12px] overflow-hidden" />
+            <div className="aspect-[4/3] rounded-[12px] overflow-hidden relative">
+              <Image
+                src="/0c785f29-43a4-4016-8ae7-3326f301c461.png"
+                alt="Royal Backs"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </div>
       </section>
