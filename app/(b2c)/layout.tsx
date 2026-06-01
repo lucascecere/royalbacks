@@ -8,7 +8,7 @@ export default function B2CLayout({ children }: { children: React.ReactNode }) {
   return (
     <CartProvider>
       {/* Marquee fixed at very top */}
-      <MarqueeBar items={['FREE SHIPPING ON ALL ORDERS $50+']} separator="✸" className="fixed top-0 left-0 right-0 z-50" />
+      <MarqueeBar items={['FREE SHIPPING ON ALL ORDERS $50+']} separator="✸" />
       {/* Pill nav floats below marquee */}
       <Header mode="b2c" />
       <CartDrawer />
