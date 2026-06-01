@@ -29,12 +29,6 @@ const COLLECTIONS = [
     href: '/collections/boston',
     image: '/rb boston v2.jpeg',
   },
-  {
-    handle: 'clovr',
-    label: 'CLOVR',
-    href: '/collections/local',
-    image: null,
-  },
 ]
 
 const TESTIMONIALS = [

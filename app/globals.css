@@ -5,8 +5,8 @@
   /* Brand Colors */
   --color-rb-black: #000000;
   --color-rb-white: #FFFFFF;
-  --color-rb-green: #027F3F;
-  --color-rb-green-dark: #025C2E;
+  --color-rb-green: #CC2929;
+  --color-rb-green-dark: #A81E1E;
   --color-rb-ink: #282828;
   --color-rb-card: #F0F0F0;
   --color-rb-sand: #D9B179;
@@ -15,8 +15,8 @@
   /* Legacy aliases (components still reference these — update them too) */
   --color-rb-navy: #000000;
   --color-rb-cream: #FFFFFF;
-  --color-rb-gold: #027F3F;
-  --color-rb-gold-light: #025C2E;
+  --color-rb-gold: #CC2929;
+  --color-rb-gold-light: #A81E1E;
   --color-rb-muted: #6B6E7A;
   --color-rb-surface: #F5F5F5;
   --color-rb-border: #E0E0E0;
@@ -46,6 +46,6 @@ body {
 .prose {
   --tw-prose-body: #282828;
   --tw-prose-headings: #000000;
-  --tw-prose-links: #027F3F;
+  --tw-prose-links: #CC2929;
   --tw-prose-bold: #000000;
 }

@@ -19,7 +19,6 @@ export function Footer({ showNap = false }: FooterProps) {
                 { label: 'Best Sellers', href: '/collections/originals' },
                 { label: 'RB', href: '/collections/originals' },
                 { label: 'Boston', href: '/collections/boston' },
-                { label: 'CLOVR', href: '/collections/local' },
               ].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-white/70 hover:text-white transition-colors">
