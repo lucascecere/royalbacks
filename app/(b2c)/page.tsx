@@ -117,7 +117,15 @@ export default async function HomePage() {
                 SHOP NOW
               </Link>
             </div>
-            <div className="aspect-[4/3] bg-rb-card rounded-[12px] overflow-hidden" />
+            <div className="aspect-[4/3] rounded-[12px] overflow-hidden relative">
+              <Image
+                src="/rb celtic hat.jpeg"
+                alt="Royal Backs Celtic Hat"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </div>
       </section>

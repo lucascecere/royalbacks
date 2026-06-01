@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, Inter } from 'next/font/google'
+import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 import Script from 'next/script'
 
-const spaceGrotesk = Space_Grotesk({
+const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-space-grotesk',
   display: 'swap',
-  weight: ['400', '700'],
+  weight: ['700', '900'],
+  style: ['normal', 'italic'],
 })
 
 const inter = Inter({
@@ -56,7 +57,7 @@ const WEBSITE_SCHEMA = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
+    <html lang="en" className={`${playfairDisplay.variable} ${inter.variable}`}>
       <head>
         <script
           type="application/ld+json"
