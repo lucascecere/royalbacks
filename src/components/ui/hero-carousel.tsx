@@ -17,11 +17,11 @@ interface HeroSlide {
 
 const SLIDES: HeroSlide[] = [
   {
-    id: 'purpose',
+    id: 'hats',
     image: '/rb hero section.jpeg',
     bgColor: '#2C3A2C',
-    headline: ['WALKING WITH', 'PURPOSE.'],
-    sub: 'Custom embroidery for apparel & accessories',
+    headline: ['HATS WORTH', 'WEARING.'],
+    sub: 'Premium caps & custom embroidery from Milton, MA.',
     ctaLabel: 'Shop Now',
     ctaHref: '/collections',
   },

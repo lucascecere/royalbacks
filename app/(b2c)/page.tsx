@@ -39,19 +39,19 @@ const COLLECTIONS = [
 
 const TESTIMONIALS = [
   {
-    headline: '"Eco-Friendly and Stylish"',
-    body: 'The quality is outstanding and the sustainability story is real. These are hats I feel good wearing.',
-    author: 'James M.',
+    headline: '"Best Hat I\'ve Owned."',
+    body: 'Bought the black snap-back and haven\'t taken it off. The embroidery is clean and it fits perfectly. Worth every penny.',
+    author: 'Mike D., Quincy',
   },
   {
-    headline: '"Ideal for Active Lifestyles"',
-    body: 'Wore mine all summer — hiking, beach, city. Held up perfectly and still looks great.',
-    author: 'Rebecca T.',
+    headline: '"Our Team Loved Them."',
+    body: 'Ordered custom embroidered hats for our crew. Royal Backs made it easy, turnaround was fast, and the quality was legit.',
+    author: 'Jake R., Milton',
   },
   {
-    headline: '"My New Daily Essential"',
-    body: "Found Royal Backs through a friend in Milton. Now I own three. Can't recommend enough.",
-    author: 'Sophia N.',
+    headline: '"Repping the South Shore."',
+    body: "Finally a local brand that actually looks good. Grabbed the Boston collection and get compliments every time I wear it.",
+    author: 'Chris T., Braintree',
   },
 ]
 
@@ -166,22 +166,25 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Sustainability story block */}
-      <section className="py-16 lg:py-24" style={{ backgroundColor: '#D9B179' }}>
+      {/* Local story block */}
+      <section className="py-16 lg:py-24 bg-rb-black">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
+              <p className="text-rb-green text-xs font-bold uppercase tracking-widest mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                Milton, MA — Since 2017
+              </p>
               <h2
-                className="font-display font-bold text-rb-ink uppercase leading-[0.9] tracking-[-0.03em] mb-6"
-                style={{ fontSize: 'clamp(36px, 5vw, 85px)' }}
+                className="font-display font-bold text-white uppercase leading-[0.9] tracking-[-0.03em] mb-6"
+                style={{ fontSize: 'clamp(36px, 5vw, 75px)' }}
               >
-                STEP INTO SUSTAINABILITY
+                ROOTED IN THE SOUTH SHORE.
               </h2>
-              <p className="text-rb-ink text-base leading-relaxed max-w-md" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-                Every Royal Backs hat is made to last. We use quality materials, thoughtful construction, and a production process that respects where we come from — Milton, MA.
+              <p className="text-white/70 text-base leading-relaxed max-w-md" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                Royal Backs started in Milton and never left. Every hat is built to be worn — not just bought. Whether it&apos;s a cap off the shelf or a custom stitch job for your team, we put the same care into every order.
               </p>
             </div>
-            <div className="aspect-[4/3] bg-[#C9A469] rounded-[12px] overflow-hidden" />
+            <div className="aspect-[4/3] bg-rb-ink rounded-[12px] overflow-hidden" />
           </div>
         </div>
       </section>
@@ -190,7 +193,7 @@ export default async function HomePage() {
       <section className="bg-white py-16 lg:py-20">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
           <h2 className="font-display text-[26px] font-normal text-rb-black uppercase mb-8">
-            WHAT ROYALBACKS CUSTOMERS HAVE TO SAY
+            DON'T TAKE OUR WORD FOR IT.
           </h2>
           <div className="grid sm:grid-cols-3 gap-4 sm:gap-6">
             {TESTIMONIALS.map((t) => (
@@ -214,23 +217,23 @@ export default async function HomePage() {
       <section className="bg-rb-black text-white py-16 lg:py-20">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10 text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-rb-green mb-3" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-            For Teams &amp; Businesses
+            Teams · Businesses · Events
           </p>
           <h2
             className="font-display font-bold text-white uppercase leading-[0.9] tracking-[-0.03em] mb-4"
             style={{ fontSize: 'clamp(32px, 4vw, 64px)' }}
           >
-            NEED CUSTOM EMBROIDERY?
+            YOUR LOGO.<br />YOUR STITCH.
           </h2>
           <p className="text-white/70 text-base max-w-xl mx-auto mb-8" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-            We&apos;ve been doing this since 2017. Hats, polos, jackets, bags — anything with a surface we can stitch. Local pickup in Milton.
+            Custom embroidery on hats, polos, jackets, bags — if it has a surface, we can stitch it. Serving South Shore teams and businesses since 2017. Local pickup in Milton.
           </p>
           <Link
             href="/embroidery"
             className="inline-block bg-rb-green text-white font-bold text-sm px-8 py-4 rounded-[7px] hover:bg-rb-green-dark transition-colors uppercase"
             style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
           >
-            Explore Embroidery Services
+            Get a Quote
           </Link>
         </div>
       </section>
