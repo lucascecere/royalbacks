@@ -12,7 +12,8 @@ export default function B2CLayout({ children }: { children: React.ReactNode }) {
       {/* Pill nav floats below marquee */}
       <Header mode="b2c" />
       <CartDrawer />
-      <main>{children}</main>
+      {/* pt-24 clears the marquee (~40px) + fixed pill nav (~88px) */}
+      <main className="pt-24">{children}</main>
       <Footer />
     </CartProvider>
   )
