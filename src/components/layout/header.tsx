@@ -43,24 +43,24 @@ export function Header({ mode }: HeaderProps) {
       <header className="fixed top-16 left-0 right-0 z-40 px-4 lg:px-8 pointer-events-none">
         <div className="max-w-[1320px] mx-auto">
           <div
-            className="flex items-center justify-between h-16 px-5 lg:px-7 rounded-2xl pointer-events-auto"
+            className="flex items-center justify-between h-16 px-5 lg:px-7 rounded-2xl pointer-events-auto overflow-hidden"
             style={{
               background: '#FFFFFF',
               boxShadow: '0 2px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)',
               border: '1px solid #EFEFEF',
             }}
           >
-            {/* Logo — cropped to text area, background blended out */}
+            {/* Logo */}
             <Link href="/" className="flex-shrink-0">
-              <div className="relative overflow-hidden" style={{ width: 180, height: 72 }}>
-                <Image
-                  src="/brand/royalbacks logo.webp"
-                  alt="Royal Backs"
-                  fill
-                  className="object-cover object-bottom mix-blend-multiply"
-                  priority
-                />
-              </div>
+              <Image
+                src="/brand/royalbacks logo.webp"
+                alt="Royal Backs"
+                width={220}
+                height={220}
+                className="w-auto object-contain mix-blend-multiply"
+                style={{ height: 80 }}
+                priority
+              />
             </Link>
 
             {/* Desktop nav */}
