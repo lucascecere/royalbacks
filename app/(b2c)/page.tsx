@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { getActiveDrop } from '@/src/services/drops'
 import { getCollectionByHandle } from '@/src/services/collections'
 import { buildMetadata } from '@/src/lib/seo'
@@ -20,19 +21,19 @@ const COLLECTIONS = [
     handle: 'rb',
     label: 'RB',
     href: '/collections/originals',
-    description: 'The original line.',
+    image: null,
   },
   {
     handle: 'boston',
     label: 'BOSTON',
     href: '/collections/boston',
-    description: 'For the city.',
+    image: '/rb boston v2.jpeg',
   },
   {
     handle: 'clovr',
     label: 'CLOVR',
     href: '/collections/local',
-    description: 'Built for the South Shore.',
+    image: null,
   },
 ]
 
@@ -146,8 +147,17 @@ export default async function HomePage() {
                 href={col.href}
                 className="group relative aspect-square bg-rb-card rounded-[12px] overflow-hidden hover:scale-[1.02] transition-transform duration-400"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
-                <div className="absolute bottom-4 right-4 flex items-center gap-1 text-rb-ink font-bold text-sm" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                {col.image && (
+                  <Image
+                    src={col.image}
+                    alt={col.label}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                <div className="absolute bottom-4 right-4 flex items-center gap-1 text-white font-bold text-sm" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
                   {col.label} <span>→</span>
                 </div>
               </Link>
