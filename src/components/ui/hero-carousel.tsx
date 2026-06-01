@@ -27,8 +27,8 @@ const SLIDES: HeroSlide[] = [
   },
   {
     id: 'boston',
-    image: null,
-    bgColor: '#D6DDE8',
+    image: '/rb boston.jpeg',
+    bgColor: '#2A3A4A',
     headline: ['BUILT FOR', 'BOSTON.'],
     sub: 'Hats that know where they came from.',
     ctaLabel: 'Shop Boston',
