@@ -107,6 +107,7 @@ export function Footer({ showNap = false }: FooterProps) {
                 width={80}
                 height={80}
                 className="h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                style={{ filter: 'invert(1) hue-rotate(180deg)' }}
               />
             </Link>
             <p>&copy; {new Date().getFullYear()} RoyalBacks LLC. All rights reserved.</p>
