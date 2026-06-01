@@ -43,62 +43,80 @@ export function Header({ mode }: HeaderProps) {
       <header className="fixed top-16 left-0 right-0 z-40 px-4 lg:px-8 pointer-events-none">
         <div className="max-w-[1320px] mx-auto">
           <div
-            className="flex items-center justify-between h-16 px-5 lg:px-7 rounded-2xl pointer-events-auto overflow-hidden"
+            className="relative h-16 px-5 lg:px-7 rounded-2xl pointer-events-auto overflow-hidden"
             style={{
               background: '#FFFFFF',
               boxShadow: '0 2px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)',
               border: '1px solid #EFEFEF',
             }}
           >
-            {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
-              <Image
-                src="/brand/royalbacks logo.webp"
-                alt="Royal Backs"
-                width={220}
-                height={220}
-                className="w-auto object-contain mix-blend-multiply"
-                style={{ height: 80 }}
-                priority
-              />
-            </Link>
-
-            {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-7" aria-label="Main navigation">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm font-medium text-rb-ink hover:text-rb-black transition-colors"
-                  style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Right side */}
-            <div className="flex items-center gap-3">
-              {mode === 'b2c' ? (
-                <CartIconButton />
-              ) : (
-                <Link
-                  href="/embroidery/quote"
-                  className="hidden md:block bg-rb-green text-white text-sm font-bold px-5 py-2 rounded-[7px] hover:bg-rb-green-dark transition-colors uppercase"
-                  style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
-                >
-                  Get a Quote
-                </Link>
-              )}
-
-              {/* Mobile menu toggle */}
+            {/* Mobile layout: hamburger | logo centered | cart */}
+            <div className="flex md:hidden items-center justify-between h-full">
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden p-1.5 text-rb-black"
+                className="p-1.5 text-rb-black w-10"
                 aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               >
                 {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
+
+              <Link href="/" className="absolute left-1/2 -translate-x-1/2">
+                <Image
+                  src="/brand/royalbacks logo.webp"
+                  alt="Royal Backs"
+                  width={220}
+                  height={220}
+                  className="w-auto object-contain mix-blend-multiply"
+                  style={{ height: 80 }}
+                  priority
+                />
+              </Link>
+
+              <div className="w-10 flex justify-end">
+                {mode === 'b2c' && <CartIconButton />}
+              </div>
+            </div>
+
+            {/* Desktop layout: logo | nav | cart */}
+            <div className="hidden md:flex items-center justify-between h-full">
+              <Link href="/" className="flex-shrink-0">
+                <Image
+                  src="/brand/royalbacks logo.webp"
+                  alt="Royal Backs"
+                  width={220}
+                  height={220}
+                  className="w-auto object-contain mix-blend-multiply"
+                  style={{ height: 80 }}
+                  priority
+                />
+              </Link>
+
+              <nav className="flex items-center gap-7" aria-label="Main navigation">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="text-sm font-medium text-rb-ink hover:text-rb-black transition-colors"
+                    style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+
+              <div className="flex items-center gap-3">
+                {mode === 'b2c' ? (
+                  <CartIconButton />
+                ) : (
+                  <Link
+                    href="/embroidery/quote"
+                    className="bg-rb-green text-white text-sm font-bold px-5 py-2 rounded-[7px] hover:bg-rb-green-dark transition-colors uppercase"
+                    style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
+                  >
+                    Get a Quote
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
 
