@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 import Script from 'next/script'
-import { IS_LIVE } from '@/src/lib/seo'
+import { IS_LIVE, METADATA_BASE } from '@/src/lib/seo'
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
@@ -19,7 +19,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://royalbacks.com'),
+  metadataBase: new URL(METADATA_BASE),
   title: {
     default: 'Royal Backs | Custom Hats & Embroidery, Milton MA',
     template: '%s | Royal Backs',

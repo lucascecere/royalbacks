@@ -10,6 +10,16 @@ export const SITE_NAME = 'Royal Backs'
  */
 export const IS_LIVE = process.env.NEXT_PUBLIC_SITE_LIVE === 'true'
 
+/**
+ * Absolute URLs (og:image especially) have to resolve on whatever host is
+ * actually serving the page. Before the domain cutover that's the Vercel URL,
+ * so pointing at royalbacks.com would give every shared link a broken preview.
+ */
+export const METADATA_BASE =
+  IS_LIVE || !process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? SITE_URL
+    : `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+
 export const NAP = {
   name: 'Royal Backs',
   addressLocality: 'Milton',
@@ -40,7 +50,7 @@ export const SERVICE_AREA_TOWNS = [
 
 export function buildMetadata(overrides: Partial<Metadata> = {}): Metadata {
   const defaults: Metadata = {
-    metadataBase: new URL(SITE_URL),
+    metadataBase: new URL(METADATA_BASE),
     title: {
       default: 'Royal Backs | Custom Hats & Embroidery, Milton MA',
       template: '%s | Royal Backs',
