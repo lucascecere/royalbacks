@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { NewsletterForm } from './newsletter-form'
 
 interface FooterProps {
   showNap?: boolean
@@ -91,25 +92,7 @@ export function Footer({ showNap = false }: FooterProps) {
             <p className="text-sm text-white/70 mb-4 leading-relaxed">
               New drops, restocks, and local events. No spam.
             </p>
-            <form className="flex flex-col gap-3">
-              <input
-                type="email"
-                placeholder="your@email.com"
-                className="w-full bg-transparent border-b border-white/30 py-2 text-sm text-white placeholder-white/40 focus:outline-none focus:border-white transition-colors"
-                aria-label="Email address for newsletter"
-              />
-              <div className="flex items-start gap-2 text-xs text-white/50">
-                <input type="checkbox" id="footer-consent" className="mt-0.5 accent-rb-green" />
-                <label htmlFor="footer-consent">I agree to receive emails from Royal Backs.</label>
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-rb-green text-white font-bold text-sm py-3 rounded-[7px] uppercase hover:bg-rb-green-dark transition-colors"
-                style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
-              >
-                Sign Up
-              </button>
-            </form>
+            <NewsletterForm />
           </div>
         </div>
 

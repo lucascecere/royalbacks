@@ -4,7 +4,6 @@ import { Shirt, HardHat, Briefcase, Users, ChefHat, GraduationCap } from 'lucide
 import { buildMetadata, buildLocalBusinessSchema, buildServiceSchema, SITE_URL } from '@/src/lib/seo'
 import { EmbroideryServiceCard } from '@/src/components/b2b/embroidery-service-card'
 import { FaqAccordion } from '@/src/components/b2b/faq-accordion'
-import { TestimonialCarousel } from '@/src/components/b2b/testimonial-carousel'
 import { LocalBusinessSchema } from '@/src/components/seo/local-business-schema'
 
 export const metadata: Metadata = buildMetadata({
@@ -136,27 +135,6 @@ const FAQS = [
   },
 ]
 
-const TESTIMONIALS = [
-  {
-    quote: 'Dylan turned our logo into something that actually looks sharp on a hat. The quality is there — we\'ve been reordering every season for two years.',
-    author: 'Mike S.',
-    role: 'Coach',
-    company: 'South Shore Youth Hockey',
-  },
-  {
-    quote: 'We needed 40 polos with our logo in two weeks. Royal Backs handled it, no drama. Exactly what I needed.',
-    author: 'Jessica T.',
-    role: 'Owner',
-    company: 'Braintree Landscaping',
-  },
-  {
-    quote: 'The communication was the best part. I always knew where my order was. We\'ll be back for the next batch.',
-    author: 'Carlos M.',
-    role: 'Manager',
-    company: 'Quincy Restaurant Group',
-  },
-]
-
 export default function EmbroideryHubPage() {
   const localBusinessSchema = buildLocalBusinessSchema()
   const serviceSchema = buildServiceSchema({
@@ -276,16 +254,6 @@ export default function EmbroideryHubPage() {
               Full process details &rarr;
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="bg-rb-surface py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <h2 className="font-display text-3xl font-bold text-rb-navy mb-12 text-center">
-            What Clients Say
-          </h2>
-          <TestimonialCarousel testimonials={TESTIMONIALS} />
         </div>
       </section>
 

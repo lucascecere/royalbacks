@@ -1,4 +1,4 @@
-import { resend } from '@/src/lib/email'
+import { sendEmail } from '@/src/lib/email'
 import type { QuoteFormData } from '@/src/types/forms'
 
 const NOTIFY_EMAIL = 'info@royalbacks.com'
@@ -89,7 +89,7 @@ export async function notifyDylan(
   data: QuoteFormData,
   confirmationId: string
 ): Promise<void> {
-  await resend.emails.send({
+  await sendEmail({
     from: FROM_EMAIL,
     to: NOTIFY_EMAIL,
     subject: `New Quote Request from ${data.name} — ${GARMENT_LABELS[data.garment_type] ?? data.garment_type}, qty ${data.quantity}`,
@@ -102,7 +102,7 @@ export async function sendQuoteConfirmation(
   data: QuoteFormData,
   confirmationId: string
 ): Promise<void> {
-  await resend.emails.send({
+  await sendEmail({
     from: FROM_EMAIL,
     to: data.email,
     subject: `We received your quote request — Royal Backs`,

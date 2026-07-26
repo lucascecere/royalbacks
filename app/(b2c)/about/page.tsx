@@ -56,7 +56,7 @@ export default function AboutPage() {
         {[
           {
             label: 'Since 2017',
-            text: 'Seven years of machine time, thread knowledge, and knowing what holds up.',
+            text: `${new Date().getFullYear() - 2017} years of machine time, thread knowledge, and knowing what holds up.`,
           },
           {
             label: 'Milton, MA',

@@ -33,8 +33,16 @@ export const metadata: Metadata = {
     siteName: 'Royal Backs',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Royal Backs embroidered hats',
+      },
+    ],
   },
-  twitter: { card: 'summary_large_image' },
+  twitter: { card: 'summary_large_image', images: ['/og-image.jpg'] },
   robots: { index: true, follow: true },
 }
 

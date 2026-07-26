@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
     root: path.resolve(__dirname),
   },
   images: {
+    // Hero and collection photos are served at quality 100
+    qualities: [75, 100],
     remotePatterns: [
       { protocol: 'https', hostname: 'cdn.shopify.com' },
       { protocol: 'https', hostname: '*.myshopify.com' },
