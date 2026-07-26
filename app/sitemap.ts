@@ -17,9 +17,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   const staticB2B = [
+    '/work',
     '/embroidery',
     '/embroidery/quote',
-    '/embroidery/portfolio',
     '/embroidery/process',
     '/embroidery/pricing',
     '/embroidery/locations',
@@ -40,12 +40,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let blogSlugs: string[] = []
   let locationSlugs: string[] = []
+  let workSlugs: string[] = []
   let productHandles: string[] = []
 
   try {
     const { getMdxSlugs } = await import('@/src/lib/mdx')
     blogSlugs = getMdxSlugs('blog')
     locationSlugs = getMdxSlugs('locations')
+    workSlugs = getMdxSlugs('work')
   } catch {
     // MDX not available at build time — skip dynamic entries
   }
@@ -86,6 +88,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${BASE}/embroidery/locations/${s}`,
       changeFrequency: 'monthly' as const,
       priority: 0.9,
+      lastModified: new Date(),
+    })),
+    ...workSlugs.map((s) => ({
+      url: `${BASE}/work/${s}`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
       lastModified: new Date(),
     })),
     ...blogSlugs.map((s) => ({

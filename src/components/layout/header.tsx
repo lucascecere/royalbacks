@@ -20,7 +20,7 @@ const B2C_NAV = [
 
 const B2B_NAV = [
   { label: 'Embroidery', href: '/embroidery' },
-  { label: 'Portfolio', href: '/embroidery/portfolio' },
+  { label: 'Work', href: '/work' },
   { label: 'Pricing', href: '/embroidery/pricing' },
   { label: 'Blog', href: '/blog' },
 ]

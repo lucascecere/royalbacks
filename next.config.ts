@@ -13,9 +13,10 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: '*.myshopify.com' },
     ],
   },
-  // 301 redirects for Wix domain migration
   async redirects() {
     return [
+      // The portfolio page became the top-level Work showcase.
+      { source: '/embroidery/portfolio', destination: '/work', permanent: true },
       // Add Wix URL redirects here when migrating
       // { source: '/old-wix-path', destination: '/new-path', permanent: true },
     ]

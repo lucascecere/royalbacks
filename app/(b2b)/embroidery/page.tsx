@@ -173,7 +173,7 @@ export default function EmbroideryHubPage() {
                 Get a Free Quote
               </Link>
               <Link
-                href="/embroidery/portfolio"
+                href="/work"
                 className="inline-block border border-rb-cream/30 text-rb-cream font-medium px-8 py-4 rounded-sm hover:border-rb-cream transition-colors text-center"
               >
                 See Our Work

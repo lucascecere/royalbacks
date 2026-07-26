@@ -24,3 +24,7 @@ export async function getIndustryRoutes(): Promise<string[]> {
 export async function getDropRoutes(): Promise<string[]> {
   return getMdxSlugs('drops')
 }
+
+export async function getWorkRoutes(): Promise<string[]> {
+  return getMdxSlugs('work')
+}

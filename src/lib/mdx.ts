@@ -9,7 +9,8 @@ export function getMdxSlugs(contentType: string): string[] {
   if (!fs.existsSync(dir)) return []
   return fs
     .readdirSync(dir)
-    .filter((f) => f.endsWith('.mdx'))
+    // Files prefixed with _ are templates/drafts, not published pages.
+    .filter((f) => f.endsWith('.mdx') && !f.startsWith('_'))
     .map((f) => f.replace(/\.mdx$/, ''))
 }
 

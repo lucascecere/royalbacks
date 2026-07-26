@@ -80,3 +80,42 @@ export interface DropPage extends DropFrontmatter {
   slug: string
   content: string
 }
+
+export interface WorkImage {
+  /** Path under /public, e.g. /work/bandits/caps-01.jpg */
+  src: string
+  alt: string
+  /** Optional caption shown under the image on the project page. */
+  caption?: string
+}
+
+export interface WorkFrontmatter {
+  title: string
+  /** Customer name to display. Omit to fall back to `client_generic`. */
+  client?: string
+  /** Used when the customer hasn't okayed being named, e.g. "Youth hockey association". */
+  client_generic?: string
+  category: string
+  /** Year the job ran. Shown next to the client. */
+  year?: string
+  summary: string
+  /** Short spec lines: "84 pieces", "4-color left chest", "10-day turnaround". */
+  specs?: string[]
+  garments?: string[]
+  cover: string
+  cover_alt?: string
+  images: WorkImage[]
+  /** Pins the project to the top of /work. */
+  featured?: boolean
+  /** Controls ordering within a category; lower sorts first. */
+  order?: number
+  meta_title?: string
+  meta_description?: string
+}
+
+export interface WorkProject extends WorkFrontmatter {
+  slug: string
+  content: string
+  /** Resolved display name: `client` when present, else `client_generic`. */
+  clientLabel: string | null
+}

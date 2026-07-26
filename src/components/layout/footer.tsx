@@ -37,7 +37,7 @@ export function Footer({ showNap = false }: FooterProps) {
               {[
                 { label: 'Custom Embroidery', href: '/embroidery' },
                 { label: 'Get a Quote', href: '/embroidery/quote' },
-                { label: 'Portfolio', href: '/embroidery/portfolio' },
+                { label: 'Our Work', href: '/work' },
                 { label: 'Pricing', href: '/embroidery/pricing' },
                 { label: 'How It Works', href: '/embroidery/process' },
               ].map((link) => (
