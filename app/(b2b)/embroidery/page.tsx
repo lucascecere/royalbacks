@@ -168,7 +168,7 @@ export default function EmbroideryHubPage() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/embroidery/quote"
-                className="inline-block bg-rb-gold text-rb-navy font-semibold px-8 py-4 rounded-sm hover:bg-rb-gold-light transition-colors text-center"
+                className="inline-block bg-rb-gold text-white font-semibold px-8 py-4 rounded-sm hover:bg-rb-gold-light transition-colors text-center"
               >
                 Get a Free Quote
               </Link>
@@ -186,7 +186,7 @@ export default function EmbroideryHubPage() {
       {/* Trust signals bar */}
       <div className="bg-rb-gold">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm font-medium text-rb-navy">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm font-medium text-white/90">
             <span>Embroidering since 2017</span>
             <span className="hidden sm:inline">·</span>
             <span>Local pickup in Milton, MA</span>
@@ -270,7 +270,7 @@ export default function EmbroideryHubPage() {
       {/* Quote CTA */}
       <section className="bg-rb-gold py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="font-display text-3xl lg:text-4xl font-bold text-rb-navy mb-4">
+          <h2 className="font-display text-3xl lg:text-4xl font-bold text-white mb-4">
             Ready to get started?
           </h2>
           <p className="text-rb-navy/70 text-lg mb-8 max-w-xl mx-auto">

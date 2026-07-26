@@ -13,7 +13,7 @@ interface HeaderProps {
 
 const B2C_NAV = [
   { label: 'Shop All', href: '/collections' },
-  { label: 'Best Sellers', href: '/collections/originals' },
+  { label: 'Originals', href: '/collections/originals' },
   { label: 'Boston', href: '/collections/boston' },
   { label: 'About Us', href: '/about' },
 ]

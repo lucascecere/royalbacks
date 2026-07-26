@@ -21,8 +21,10 @@
   --color-rb-surface: #F5F5F5;
   --color-rb-border: #E0E0E0;
 
-  /* Typography */
-  --font-display: var(--font-space-grotesk);
+  /* Typography.
+     No --font-display here on purpose: an @theme entry generates a competing
+     .font-display utility that wins the cascade over the rule below and blanks
+     the family out. The explicit class is the single source of truth. */
   --font-sans: var(--font-inter);
 
   /* Radii */
@@ -39,7 +41,7 @@ body {
 }
 
 .font-display {
-  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-family: var(--font-playfair), Georgia, serif;
 }
 
 /* Prose customization for MDX content */

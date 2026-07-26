@@ -160,7 +160,7 @@ export default function PricingPage() {
       <div className="text-center">
         <Link
           href="/embroidery/quote"
-          className="inline-block bg-rb-gold text-rb-navy font-semibold px-10 py-4 rounded-sm hover:bg-rb-gold-light transition-colors"
+          className="inline-block bg-rb-gold text-white font-semibold px-10 py-4 rounded-sm hover:bg-rb-gold-light transition-colors"
         >
           Get an Exact Quote
         </Link>

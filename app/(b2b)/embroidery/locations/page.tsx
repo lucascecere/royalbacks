@@ -76,7 +76,7 @@ export default function LocationsIndexPage() {
           </p>
           <Link
             href="/embroidery/quote"
-            className="inline-block bg-rb-gold text-rb-navy font-semibold px-8 py-3 rounded-sm hover:bg-rb-gold-light transition-colors"
+            className="inline-block bg-rb-gold text-white font-semibold px-8 py-3 rounded-sm hover:bg-rb-gold-light transition-colors"
           >
             Get a Quote
           </Link>

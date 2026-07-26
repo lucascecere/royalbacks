@@ -168,7 +168,7 @@ export default function ProcessPage() {
         <p className="text-rb-cream/70 mb-6">Get a quote in under 5 minutes.</p>
         <Link
           href="/embroidery/quote"
-          className="inline-block bg-rb-gold text-rb-navy font-semibold px-8 py-3 rounded-sm hover:bg-rb-gold-light transition-colors"
+          className="inline-block bg-rb-gold text-white font-semibold px-8 py-3 rounded-sm hover:bg-rb-gold-light transition-colors"
         >
           Get a Free Quote
         </Link>

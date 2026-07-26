@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getActiveDrop } from '@/src/services/drops'
 import { getCollectionByHandle } from '@/src/services/collections'
 import { buildMetadata } from '@/src/lib/seo'
 import { ProductCard } from '@/src/components/product/product-card'
@@ -18,42 +17,27 @@ export const metadata: Metadata = buildMetadata({
 
 const COLLECTIONS = [
   {
-    handle: 'rb',
-    label: 'RB',
+    handle: 'originals',
+    label: 'ORIGINALS',
     href: '/collections/originals',
-    image: '/Gemini_Generated_Image_47gce247gce247gc.png',
+    image: '/products/rb-4suites-white.jpg',
   },
   {
     handle: 'boston',
     label: 'BOSTON',
     href: '/collections/boston',
-    image: '/rb boston v2.jpeg',
-  },
-]
-
-const TESTIMONIALS = [
-  {
-    headline: '"Best Hat I\'ve Owned."',
-    body: 'Bought the black snap-back and haven\'t taken it off. The embroidery is clean and it fits perfectly. Worth every penny.',
-    author: 'Mike D., Quincy',
+    image: '/products/boston-gray.jpg',
   },
   {
-    headline: '"Our Team Loved Them."',
-    body: 'Ordered custom embroidered hats for our crew. Royal Backs made it easy, turnaround was fast, and the quality was legit.',
-    author: 'Jake R., Milton',
-  },
-  {
-    headline: '"Repping the South Shore."',
-    body: "Finally a local brand that actually looks good. Grabbed the Boston collection and get compliments every time I wear it.",
-    author: 'Chris T., Braintree',
+    handle: 'local',
+    label: 'LOCAL',
+    href: '/collections/local',
+    image: '/products/rb-natural-black.jpg',
   },
 ]
 
 export default async function HomePage() {
-  const [activeDrop, originalsCollection] = await Promise.all([
-    getActiveDrop(),
-    getCollectionByHandle('originals'),
-  ])
+  const originalsCollection = await getCollectionByHandle('originals')
 
   const featuredProducts = originalsCollection?.products.slice(0, 4) ?? []
 
@@ -68,7 +52,7 @@ export default async function HomePage() {
           <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
             <div className="flex items-center justify-between mb-8">
               <h2
-                className="font-display text-[26px] font-normal text-rb-black uppercase"
+                className="font-display text-[26px] font-bold text-rb-black uppercase"
               >
                 OUR BEST SELLERS
               </h2>
@@ -89,32 +73,36 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Promo split */}
+      {/* Boston feature */}
       <section className="bg-white py-16 lg:py-20 border-t border-rb-card">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
+              <p className="text-rb-green text-xs font-bold uppercase tracking-widest mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                The Boston Collection
+              </p>
               <h2
-                className="font-display font-normal text-rb-black uppercase leading-[1.0] tracking-[-0.03em] mb-4"
+                className="font-display font-bold text-rb-black uppercase leading-[1.0] tracking-[-0.03em] mb-4"
                 style={{ fontSize: 'clamp(32px, 4vw, 58px)' }}
               >
-                ROYALBACKS<br />20% OFF SALE
+                FOR THE CITY<br />AND EVERYONE<br />IN ITS ORBIT.
               </h2>
-              <p className="text-rb-ink text-base mb-6" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-                Exclusive, one-time offer.
+              <p className="text-rb-ink text-base mb-6 max-w-md" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                Script logos, shamrocks, and old-school lettering — on rope caps, truckers, and
+                classic five-panels.
               </p>
               <Link
-                href="/collections"
+                href="/collections/boston"
                 className="inline-block border border-rb-black text-rb-black font-bold text-sm px-6 py-3 rounded-[7px] hover:bg-rb-black hover:text-white transition-colors uppercase"
                 style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
               >
-                SHOP NOW
+                Shop Boston
               </Link>
             </div>
-            <div className="aspect-[4/3] rounded-[12px] overflow-hidden relative">
+            <div className="aspect-[4/3] rounded-[12px] overflow-hidden relative bg-[#F7F6F4]">
               <Image
-                src="/rb celtic hat.jpeg"
-                alt="Royal Backs Celtic Hat"
+                src="/products/boston-shamrock.jpg"
+                alt="Royal Backs Boston shamrock cap"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -131,7 +119,7 @@ export default async function HomePage() {
       <section className="bg-white py-16 lg:py-20">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-display text-[26px] font-normal text-rb-black uppercase">
+            <h2 className="font-display text-[26px] font-bold text-rb-black uppercase">
               SHOP BY COLLECTION
             </h2>
             <Link
@@ -186,39 +174,15 @@ export default async function HomePage() {
                 Royal Backs started in Milton and never left. Every hat is built to be worn — not just bought. Whether it&apos;s a cap off the shelf or a custom stitch job for your team, we put the same care into every order.
               </p>
             </div>
-            <div className="aspect-[4/3] rounded-[12px] overflow-hidden relative">
+            <div className="aspect-[4/3] rounded-[12px] overflow-hidden relative bg-[#F7F6F4]">
               <Image
-                src="/17055803596131524641.png"
-                alt="Royal Backs"
+                src="/products/rb-arch-gray.jpg"
+                alt="Royal Backs arch logo cap in heather grey"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="bg-white py-16 lg:py-20">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
-          <h2 className="font-display text-[26px] font-normal text-rb-black uppercase mb-8">
-            DON'T TAKE OUR WORD FOR IT.
-          </h2>
-          <div className="grid sm:grid-cols-3 gap-4 sm:gap-6">
-            {TESTIMONIALS.map((t) => (
-              <div key={t.author} className="bg-rb-card rounded-[12px] p-8">
-                <p className="font-display text-rb-green font-bold text-lg mb-3 leading-tight">
-                  {t.headline}
-                </p>
-                <p className="text-rb-ink text-sm leading-relaxed mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-                  {t.body}
-                </p>
-                <p className="text-xs font-bold text-rb-ink uppercase tracking-widest" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-                  — {t.author}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

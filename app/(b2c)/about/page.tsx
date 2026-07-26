@@ -33,7 +33,7 @@ export default function AboutPage() {
         <p className="leading-relaxed text-rb-muted">
           What started as a small operation — a single embroidery machine, a basement table, and a
           lot of opinions about thread tension — grew into something bigger. Today Royal Backs
-          serves customers across the South Shore, both through our direct B2C line and through
+          serves customers across the South Shore — both through our own collections and through
           custom embroidery work for local businesses, sports teams, and organizations.
         </p>
 

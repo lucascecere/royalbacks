@@ -6,7 +6,7 @@ import { IS_LIVE, METADATA_BASE } from '@/src/lib/seo'
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
+  variable: '--font-playfair',
   display: 'swap',
   weight: ['700', '900'],
   style: ['normal', 'italic'],

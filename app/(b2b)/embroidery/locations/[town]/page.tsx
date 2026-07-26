@@ -126,10 +126,10 @@ export default async function LocationPage({
 
         {/* Quote CTA */}
         <div className="mt-12 bg-rb-gold rounded-sm p-8 text-center">
-          <h2 className="font-display text-2xl font-bold text-rb-navy mb-3">
+          <h2 className="font-display text-2xl font-bold text-white mb-3">
             Get a Quote for {location.town}
           </h2>
-          <p className="text-rb-navy/70 mb-6">
+          <p className="text-white/80 mb-6">
             We respond within 1 business day. Free local pickup from Milton, MA.
           </p>
           <Link

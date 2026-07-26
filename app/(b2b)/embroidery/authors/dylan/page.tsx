@@ -19,7 +19,7 @@ const EXPERTISE = [
 
 const CREDENTIALS = [
   { label: 'Founded Royal Backs', year: '2017' },
-  { label: 'Years of commercial embroidery experience', year: '7+' },
+  { label: 'Years of commercial embroidery experience', year: `${new Date().getFullYear() - 2017}+` },
   { label: 'Location', year: 'Milton, MA' },
 ]
 
@@ -50,7 +50,7 @@ export default function DylanAuthorPage() {
           middleman — Dylan does the work.
         </p>
         <p>
-          Over seven years, Dylan has embroidered logos for youth hockey teams, local restaurants,
+          Since 2017, Dylan has embroidered logos for youth hockey teams, local restaurants,
           landscaping companies, schools, and everyone in between. He knows thread tension, he
           knows what garments hold up, and he has a lot of opinions about hat construction.
         </p>

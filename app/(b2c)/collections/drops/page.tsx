@@ -47,7 +47,7 @@ export default async function DropsPage() {
             </p>
             <Link
               href={`/collections/drops/${activeDrop.handle}`}
-              className="inline-block bg-rb-gold text-rb-navy font-semibold px-6 py-3 rounded-sm hover:bg-rb-gold-light transition-colors"
+              className="inline-block bg-rb-gold text-white font-semibold px-6 py-3 rounded-sm hover:bg-rb-gold-light transition-colors"
             >
               Shop This Drop
             </Link>

@@ -17,9 +17,9 @@ export function Footer({ showNap = false }: FooterProps) {
             <ul className="space-y-3 text-sm">
               {[
                 { label: 'All Products', href: '/collections' },
-                { label: 'Best Sellers', href: '/collections/originals' },
-                { label: 'RB', href: '/collections/originals' },
+                { label: 'Originals', href: '/collections/originals' },
                 { label: 'Boston', href: '/collections/boston' },
+                { label: 'Local', href: '/collections/local' },
               ].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-white/70 hover:text-white transition-colors">
