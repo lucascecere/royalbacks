@@ -3,6 +3,13 @@ import type { Metadata } from 'next'
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://royalbacks.com'
 export const SITE_NAME = 'Royal Backs'
 
+/**
+ * Search engines are kept off the site until the real domain is live, so the
+ * temporary *.vercel.app preview never gets indexed. Set NEXT_PUBLIC_SITE_LIVE
+ * to "true" in Vercel at domain cutover to open indexing up.
+ */
+export const IS_LIVE = process.env.NEXT_PUBLIC_SITE_LIVE === 'true'
+
 export const NAP = {
   name: 'Royal Backs',
   addressLocality: 'Milton',

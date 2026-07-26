@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 import Script from 'next/script'
+import { IS_LIVE } from '@/src/lib/seo'
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: { card: 'summary_large_image', images: ['/og-image.jpg'] },
-  robots: { index: true, follow: true },
+  robots: { index: IS_LIVE, follow: IS_LIVE },
 }
 
 const ORGANIZATION_SCHEMA = {
