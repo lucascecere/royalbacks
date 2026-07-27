@@ -60,35 +60,39 @@ export const CART_LINES_REMOVE_MUTATION = `
   }
 `
 
-export const CUSTOMER_CREATE_MUTATION = `
-  mutation CustomerCreate($input: CustomerCreateInput!) {
-    customerCreate(input: $input) {
-      customer {
-        id
-        email
-        firstName
-        lastName
+/**
+ * Applying a loyalty reward to the cart.
+ *
+ * Redemption codes are restricted to a single Shopify customer, and Shopify only
+ * resolves that restriction if it can identify the buyer — so the cart's
+ * buyerIdentity email must be set before the discount will stick. Without it the
+ * code is accepted into the cart and then silently fails to discount anything.
+ */
+export const CART_BUYER_IDENTITY_UPDATE_MUTATION = `
+  ${CART_FRAGMENT}
+  mutation CartBuyerIdentityUpdate($cartId: ID!, $buyerIdentity: CartBuyerIdentityInput!) {
+    cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentity) {
+      cart {
+        ...CartFragment
       }
-      customerUserErrors {
+      userErrors {
         field
         message
-        code
       }
     }
   }
 `
 
-export const CUSTOMER_ACCESS_TOKEN_CREATE_MUTATION = `
-  mutation CustomerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
-    customerAccessTokenCreate(input: $input) {
-      customerAccessToken {
-        accessToken
-        expiresAt
+export const CART_DISCOUNT_CODES_UPDATE_MUTATION = `
+  ${CART_FRAGMENT}
+  mutation CartDiscountCodesUpdate($cartId: ID!, $discountCodes: [String!]!) {
+    cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
+      cart {
+        ...CartFragment
       }
-      customerUserErrors {
+      userErrors {
         field
         message
-        code
       }
     }
   }

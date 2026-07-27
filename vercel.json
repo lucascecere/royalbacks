@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "crons": [
+    {
+      "path": "/api/cron/reclaim-redemptions",
+      "schedule": "0 9 * * *"
+    }
+  ]
+}

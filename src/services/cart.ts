@@ -4,6 +4,8 @@ import {
   CART_LINES_ADD_MUTATION,
   CART_LINES_UPDATE_MUTATION,
   CART_LINES_REMOVE_MUTATION,
+  CART_BUYER_IDENTITY_UPDATE_MUTATION,
+  CART_DISCOUNT_CODES_UPDATE_MUTATION,
 } from '@/src/lib/shopify/mutations'
 import { CART_QUERY } from '@/src/lib/shopify/queries'
 import type {
@@ -119,4 +121,54 @@ export async function getCart(cartId: string): Promise<ShopifyCart | null> {
   } catch {
     return null
   }
+}
+
+/**
+ * Attach a loyalty reward to the cart.
+ *
+ * Two steps, and the order matters. Loyalty codes are restricted to one Shopify
+ * customer, and Shopify can only match that restriction if the cart says who the
+ * buyer is — so buyerIdentity has to be set first. Skip it and the code is accepted
+ * into the cart but discounts nothing, which looks to the customer like their points
+ * vanished.
+ */
+export async function applyDiscountToCart(
+  cartId: string,
+  code: string,
+  email: string
+): Promise<ShopifyCart> {
+  const identity = await storefrontClient.request<{
+    cartBuyerIdentityUpdate: {
+      cart: RawCart | null
+      userErrors: Array<{ field: string[] | null; message: string }>
+    }
+  }>(CART_BUYER_IDENTITY_UPDATE_MUTATION, {
+    variables: { cartId, buyerIdentity: { email } },
+  })
+
+  const identityErrors = identity.data?.cartBuyerIdentityUpdate?.userErrors ?? []
+  if (identity.errors || identityErrors.length > 0) {
+    throw new Error(
+      `Could not set cart buyer identity: ${identityErrors.map((e) => e.message).join('; ')}`
+    )
+  }
+
+  const applied = await storefrontClient.request<{
+    cartDiscountCodesUpdate: {
+      cart: (RawCart & { discountCodes?: Array<{ code: string; applicable: boolean }> }) | null
+      userErrors: Array<{ field: string[] | null; message: string }>
+    }
+  }>(CART_DISCOUNT_CODES_UPDATE_MUTATION, {
+    variables: { cartId, discountCodes: [code] },
+  })
+
+  const applyErrors = applied.data?.cartDiscountCodesUpdate?.userErrors ?? []
+  const cart = applied.data?.cartDiscountCodesUpdate?.cart
+  if (applied.errors || applyErrors.length > 0 || !cart) {
+    throw new Error(
+      `Could not apply reward to cart: ${applyErrors.map((e) => e.message).join('; ')}`
+    )
+  }
+
+  return normalizeCart(cart)
 }

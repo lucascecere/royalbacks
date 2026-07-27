@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CartIconButton } from '@/src/components/cart/cart-icon-button'
+import { User } from 'lucide-react'
 
 interface HeaderProps {
   mode: 'b2c' | 'b2b'
@@ -106,7 +107,16 @@ export function Header({ mode }: HeaderProps) {
 
               <div className="flex items-center gap-3">
                 {mode === 'b2c' ? (
-                  <CartIconButton />
+                  <>
+                    <Link
+                      href="/account"
+                      aria-label="Your account"
+                      className="text-rb-black hover:text-rb-green transition-colors p-1"
+                    >
+                      <User className="w-5 h-5" />
+                    </Link>
+                    <CartIconButton />
+                  </>
                 ) : (
                   <Link
                     href="/embroidery/quote"
@@ -156,13 +166,22 @@ export function Header({ mode }: HeaderProps) {
                     </Link>
                   )}
                   {mode === 'b2c' && (
-                    <Link
-                      href="/embroidery"
-                      onClick={() => setMobileOpen(false)}
-                      className="border border-rb-green text-rb-green text-center py-3 font-medium rounded-[7px] mt-1 text-sm"
-                    >
-                      Custom Embroidery
-                    </Link>
+                    <>
+                      <Link
+                        href="/account"
+                        onClick={() => setMobileOpen(false)}
+                        className="text-rb-black py-2 text-sm font-medium"
+                      >
+                        Account &amp; Rewards
+                      </Link>
+                      <Link
+                        href="/embroidery"
+                        onClick={() => setMobileOpen(false)}
+                        className="border border-rb-green text-rb-green text-center py-3 font-medium rounded-[7px] mt-1 text-sm"
+                      >
+                        Custom Embroidery
+                      </Link>
+                    </>
                   )}
                 </nav>
               </motion.div>
