@@ -100,7 +100,7 @@ export function HeroCarousel() {
           className="order-2 lg:order-1 flex items-center transition-colors duration-500"
           style={{ backgroundColor: slide.panel }}
         >
-          <div className="w-full px-6 sm:px-10 lg:pl-[max(2.5rem,calc((100vw-1320px)/2))] lg:pr-16 py-14 lg:py-24">
+          <div className="w-full px-6 sm:px-10 lg:pl-[max(2.5rem,calc((100vw-1320px)/2))] lg:pr-16 pt-16 pb-14 lg:pt-52 lg:pb-28">
             <AnimatePresence mode="wait">
               <motion.div
                 key={slide.id}

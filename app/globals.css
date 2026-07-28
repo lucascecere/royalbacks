@@ -51,3 +51,9 @@ body {
   --tw-prose-links: #CC2929;
   --tw-prose-bold: #000000;
 }
+
+/* The pill nav is fixed, so anything scrolled to — a focused input, an in-page
+   anchor — would otherwise land underneath it. */
+:where(input, textarea, select, [id]) {
+  scroll-margin-top: 9rem;
+}

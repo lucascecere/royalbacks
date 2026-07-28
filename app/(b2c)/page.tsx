@@ -6,6 +6,7 @@ import { buildMetadata } from '@/src/lib/seo'
 import { ProductCard } from '@/src/components/product/product-card'
 import { MarqueeBar } from '@/src/components/ui/marquee-bar'
 import { HeroCarousel } from '@/src/components/ui/hero-carousel'
+import { EnquiryForm } from '@/src/components/b2b/enquiry-form'
 
 export const revalidate = 900
 
@@ -75,47 +76,8 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Boston feature */}
-      <section className="bg-white py-16 lg:py-20 border-t border-rb-card">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-rb-green text-xs font-bold uppercase tracking-widest mb-4" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-                The Boston Collection
-              </p>
-              <h2
-                className="font-display font-bold text-rb-black uppercase leading-[1.0] tracking-[-0.03em] mb-4"
-                style={{ fontSize: 'clamp(32px, 4vw, 58px)' }}
-              >
-                FOR THE CITY<br />AND EVERYONE<br />IN ITS ORBIT.
-              </h2>
-              <p className="text-rb-ink text-base mb-6 max-w-md" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-                Script logos, shamrocks, and old-school lettering — on rope caps, truckers, and
-                classic five-panels.
-              </p>
-              <Link
-                href="/collections/boston"
-                className="inline-block border border-rb-black text-rb-black font-bold text-sm px-6 py-3 rounded-[7px] hover:bg-rb-black hover:text-white transition-colors uppercase"
-                style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
-              >
-                Shop Boston
-              </Link>
-            </div>
-            <div className="aspect-[4/3] rounded-[12px] overflow-hidden relative bg-[#F7F6F4]">
-              <Image
-                src="/products/boston-shamrock.jpg"
-                alt="Royal Backs Boston shamrock cap"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Second marquee */}
-      <MarqueeBar items={['LIMITED EDITION, FRESHLY ARRIVED']} separator="✶" />
+      <MarqueeBar items={['MADE IN MILTON, MA', 'CUSTOM EMBROIDERY FOR TEAMS & BUSINESSES']} separator="✶" />
 
       {/* Shop by Collection */}
       <section className="bg-white py-16 lg:py-20">
@@ -172,9 +134,20 @@ export default async function HomePage() {
               >
                 ROOTED IN THE SOUTH SHORE.
               </h2>
-              <p className="text-white/70 text-base leading-relaxed max-w-md" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-                Royal Backs started in Milton and never left. Every hat is built to be worn — not just bought. Whether it&apos;s a cap off the shelf or a custom stitch job for your team, we put the same care into every order.
-              </p>
+              <div className="space-y-4 max-w-md" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+                <p className="text-white/70 text-base leading-relaxed">
+                  Royal Backs started in Milton and never left. It began with one machine
+                  in a family home and a lot of opinions about thread tension, and it still
+                  runs the same way — small batches, and the person who takes your order is
+                  the person running the machine.
+                </p>
+                <p className="text-white/70 text-base leading-relaxed">
+                  Milton sits right where the city ends and the South Shore begins, and
+                  that&apos;s the whole brand. Hats for people who grew up around here, and
+                  embroidery for the teams, crews and restaurants that keep the place
+                  running. Order local, pick it up local.
+                </p>
+              </div>
             </div>
             <div className="aspect-[4/3] rounded-[12px] overflow-hidden relative bg-[#F7F6F4]">
               <Image
@@ -189,28 +162,59 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* B2B Embroidery CTA */}
-      <section className="bg-rb-black text-white py-16 lg:py-20">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-10 text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-rb-green mb-3" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-            Teams · Businesses · Events
-          </p>
-          <h2
-            className="font-display font-bold text-white uppercase leading-[0.9] tracking-[-0.03em] mb-4"
-            style={{ fontSize: 'clamp(32px, 4vw, 64px)' }}
-          >
-            YOUR LOGO.<br />YOUR STITCH.
-          </h2>
-          <p className="text-white/70 text-base max-w-xl mx-auto mb-8" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-            Custom embroidery on hats, polos, jackets, bags — if it has a surface, we can stitch it. Serving South Shore teams and businesses since 2017. Local pickup in Milton.
-          </p>
-          <Link
-            href="/embroidery"
-            className="inline-block bg-rb-green text-white font-bold text-sm px-8 py-4 rounded-[7px] hover:bg-rb-green-dark transition-colors uppercase"
-            style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
-          >
-            Get a Quote
-          </Link>
+      {/* Embroidery enquiry */}
+      <section className="bg-rb-card py-16 lg:py-24">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            <div>
+              <p
+                className="text-rb-green text-xs font-bold uppercase tracking-widest mb-4"
+                style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
+              >
+                Teams · Businesses · Events
+              </p>
+              <h2
+                className="font-display font-bold text-rb-black uppercase leading-[0.9] tracking-[-0.03em] mb-5"
+                style={{ fontSize: 'clamp(34px, 4.4vw, 64px)' }}
+              >
+                YOUR LOGO.<br />YOUR STITCH.
+              </h2>
+              <p
+                className="text-rb-ink text-base leading-relaxed max-w-md mb-8"
+                style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
+              >
+                Hats, polos, jackets, bags — if it has a surface, we can stitch it. Tell us
+                what you&apos;re planning and we&apos;ll come back with real pricing, not a
+                runaround.
+              </p>
+
+              <dl className="grid sm:grid-cols-2 gap-x-8 gap-y-5">
+                {[
+                  { term: 'One business day', desc: 'We answer every enquiry, fast.' },
+                  { term: '5–10 day turnaround', desc: 'Rush available when you need it.' },
+                  { term: 'Free local pickup', desc: 'Milton, MA. Shipping anywhere.' },
+                  { term: 'No minimum drama', desc: 'Small runs are welcome here.' },
+                ].map((item) => (
+                  <div key={item.term}>
+                    <dt
+                      className="text-sm font-bold text-rb-black mb-1"
+                      style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
+                    >
+                      {item.term}
+                    </dt>
+                    <dd
+                      className="text-sm text-rb-muted leading-relaxed"
+                      style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
+                    >
+                      {item.desc}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            <EnquiryForm />
+          </div>
         </div>
       </section>
     </>
