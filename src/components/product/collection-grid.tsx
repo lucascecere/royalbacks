@@ -1,18 +1,17 @@
 import { ProductCard } from './product-card'
+import { CollectionEmpty } from './collection-empty'
 import type { ShopifyProduct } from '@/src/types/shopify'
 
 interface CollectionGridProps {
   products: ShopifyProduct[]
   className?: string
+  /** Collection name, for the empty-state copy. */
+  collection?: string
 }
 
-export function CollectionGrid({ products, className }: CollectionGridProps) {
+export function CollectionGrid({ products, className, collection }: CollectionGridProps) {
   if (products.length === 0) {
-    return (
-      <div className="text-center py-16">
-        <p className="text-rb-muted">No products found.</p>
-      </div>
-    )
+    return <CollectionEmpty collection={collection} />
   }
 
   return (

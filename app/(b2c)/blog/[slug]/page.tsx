@@ -22,11 +22,14 @@ export async function generateMetadata({
   const post = getPostBySlug(slug)
   if (!post) return {}
   return buildMetadata({
-    title: post.title,
+    // Long headlines make good h1s and bad <title>s — the template appends the
+    // brand, which pushes past what a search result will show.
+    title: post.meta_title ?? post.title,
     description: post.description,
     openGraph: {
       type: 'article',
-      images: post.og_image ? [{ url: post.og_image }] : undefined,
+      // Fall back to the site image so a shared post still previews with a picture.
+      images: [{ url: post.og_image ?? '/og-image.jpg' }],
     },
   })
 }

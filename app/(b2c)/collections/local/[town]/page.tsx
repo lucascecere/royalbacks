@@ -1,8 +1,13 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getLocationBySlug, getLocationSlugs } from '@/src/services/locations'
+import { getLocationBySlug } from '@/src/services/locations'
 import { getCollectionByHandle } from '@/src/services/collections'
-import { buildMetadata, buildLocalBusinessSchema } from '@/src/lib/seo'
+import {
+  buildMetadata,
+  buildLocalBusinessSchema,
+  findTown,
+  SOUTH_SHORE_TOWNS,
+} from '@/src/lib/seo'
 import { CollectionGrid } from '@/src/components/product/collection-grid'
 import { LocalBusinessSchema } from '@/src/components/seo/local-business-schema'
 import { BreadcrumbNav } from '@/src/components/seo/breadcrumb-nav'
@@ -10,8 +15,9 @@ import { BreadcrumbNav } from '@/src/components/seo/breadcrumb-nav'
 export const revalidate = 86400
 
 export async function generateStaticParams() {
-  const slugs = getLocationSlugs()
-  return slugs.map((slug) => ({ town: slug }))
+  // Every town we serve, not just the two with a long-form embroidery write-up.
+  // These are merch pages; the MDX only adds richer copy where it exists.
+  return SOUTH_SHORE_TOWNS.map((t) => ({ town: t.slug }))
 }
 
 export async function generateMetadata({
@@ -20,11 +26,14 @@ export async function generateMetadata({
   params: Promise<{ town: string }>
 }): Promise<Metadata> {
   const { town } = await params
+  const match = findTown(town)
+  if (!match) return {}
   const location = getLocationBySlug(town)
-  if (!location) return {}
   return buildMetadata({
-    title: location.meta_title,
-    description: location.meta_description,
+    title: location?.meta_title ?? `${match.name} Hats — Local Collection`,
+    description:
+      location?.meta_description ??
+      `Royal Backs hats repping ${match.name}, MA. Made on the South Shore, plus custom embroidery for ${match.name} teams and businesses.`,
   })
 }
 
@@ -34,16 +43,21 @@ export default async function TownCollectionPage({
   params: Promise<{ town: string }>
 }) {
   const { town } = await params
+  // Valid if it's a town we serve. A long-form MDX page is a bonus, not a gate —
+  // requiring one 404'd eleven of the thirteen towns this page links to.
+  const match = findTown(town)
+  if (!match) notFound()
+
   const location = getLocationBySlug(town)
-  if (!location) notFound()
+  const townName = location?.town ?? match.name
+  const county = location?.county ?? 'Massachusetts'
 
   const collection = await getCollectionByHandle('local')
   const products = collection?.products ?? []
 
-  const localBusinessSchema = buildLocalBusinessSchema({
-    town: location.town,
-    coordinates: location.coordinates,
-  })
+  const localBusinessSchema = buildLocalBusinessSchema(
+    location?.coordinates ? { coordinates: location.coordinates } : {}
+  )
 
   return (
     <>
@@ -55,33 +69,33 @@ export default async function TownCollectionPage({
             { name: 'Home', href: '/' },
             { name: 'Collections', href: '/collections' },
             { name: 'Local', href: '/collections/local' },
-            { name: location.town, href: `/collections/local/${town}` },
+            { name: townName, href: `/collections/local/${town}` },
           ]}
         />
 
         <header className="mt-6 mb-10">
-          {location.is_hq && (
+          {location?.is_hq && (
             <span className="inline-block bg-rb-gold/10 text-rb-gold text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-3">
               Our Home
             </span>
           )}
           <h1 className="font-display text-4xl font-bold text-rb-navy mb-3">
-            {location.town} Collection
+            {townName} Collection
           </h1>
           <p className="text-rb-muted text-lg max-w-xl">
-            Hats representing {location.town}, {location.county}. South Shore made, South Shore
+            Hats representing {townName}, {county}. South Shore made, South Shore
             proud.
           </p>
         </header>
 
-        <CollectionGrid products={products} />
+        <CollectionGrid products={products} collection={`${townName}`} />
 
         <div className="mt-12 bg-rb-navy/5 border border-rb-border rounded-sm p-6">
           <h2 className="font-display text-xl font-semibold text-rb-navy mb-2">
             Can&apos;t find what you&apos;re looking for?
           </h2>
           <p className="text-rb-muted text-sm mb-4 leading-relaxed">
-            We do custom embroidery for {location.town} businesses and organizations too. Hats,
+            We do custom embroidery for {townName} businesses and organizations too. Hats,
             polos, whatever you need.
           </p>
           <a

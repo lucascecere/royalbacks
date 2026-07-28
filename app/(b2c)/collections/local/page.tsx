@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { buildMetadata } from '@/src/lib/seo'
+import { buildMetadata, SOUTH_SHORE_TOWNS } from '@/src/lib/seo'
 import { BreadcrumbNav } from '@/src/components/seo/breadcrumb-nav'
 
 export const metadata: Metadata = buildMetadata({
@@ -9,21 +9,6 @@ export const metadata: Metadata = buildMetadata({
     'Royal Backs Local Collection — hats representing South Shore Massachusetts towns. Milton, Quincy, Hingham, Cohasset, and more.',
 })
 
-const SOUTH_SHORE_TOWNS = [
-  { name: 'Milton', slug: 'milton' },
-  { name: 'Quincy', slug: 'quincy' },
-  { name: 'Braintree', slug: 'braintree' },
-  { name: 'Weymouth', slug: 'weymouth' },
-  { name: 'Hingham', slug: 'hingham' },
-  { name: 'Cohasset', slug: 'cohasset' },
-  { name: 'Scituate', slug: 'scituate' },
-  { name: 'Norwell', slug: 'norwell' },
-  { name: 'Marshfield', slug: 'marshfield' },
-  { name: 'Duxbury', slug: 'duxbury' },
-  { name: 'Canton', slug: 'canton' },
-  { name: 'Randolph', slug: 'randolph' },
-  { name: 'Dorchester', slug: 'dorchester' },
-]
 
 export default function LocalCollectionPage() {
   return (

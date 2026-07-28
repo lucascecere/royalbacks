@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import { getCollectionByHandle } from '@/src/services/collections'
 import { buildMetadata } from '@/src/lib/seo'
 import { CollectionGrid } from '@/src/components/product/collection-grid'
@@ -14,9 +13,11 @@ export const metadata: Metadata = buildMetadata({
 })
 
 export default async function BostonCollectionPage() {
+  // Never 404 on a known collection. Before the store is connected this returns
+  // null, and a dead link from the homepage CTA reads as a broken site rather than
+  // one that hasn't launched.
   const collection = await getCollectionByHandle('boston')
-
-  if (!collection) notFound()
+  const products = collection?.products ?? []
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 lg:py-12">
@@ -35,7 +36,7 @@ export default async function BostonCollectionPage() {
         </p>
       </header>
 
-      <CollectionGrid products={collection.products} />
+      <CollectionGrid products={products} collection="Boston" />
     </div>
   )
 }

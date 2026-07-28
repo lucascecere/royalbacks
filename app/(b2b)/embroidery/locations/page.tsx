@@ -5,7 +5,7 @@ import { SERVICE_AREA_TOWNS, buildMetadata } from '@/src/lib/seo'
 import { BreadcrumbNav } from '@/src/components/seo/breadcrumb-nav'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Custom Embroidery — Service Area | South Shore MA',
+  title: 'Service Area — South Shore MA',
   description:
     'Royal Backs provides custom embroidery services across the South Shore of Massachusetts. Milton, Quincy, Hingham, Braintree, and beyond.',
 })

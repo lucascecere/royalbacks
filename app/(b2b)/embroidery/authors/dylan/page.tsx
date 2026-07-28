@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { buildMetadata } from '@/src/lib/seo'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Dylan McDougall — Royal Backs',
+  title: 'Dylan McDougall',
   description:
     'Dylan McDougall is the founder of Royal Backs, a custom hat and embroidery shop in Milton, MA. He has been embroidering since 2017.',
 })

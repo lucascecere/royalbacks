@@ -4,7 +4,7 @@ import { buildMetadata } from '@/src/lib/seo'
 import { BreadcrumbNav } from '@/src/components/seo/breadcrumb-nav'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Embroidery Pricing | Custom Hats & Apparel | Royal Backs',
+  title: 'Embroidery Pricing',
   description:
     'Transparent embroidery pricing from Royal Backs. Hats starting at $14, polos at $18. Quantity breaks, digitizing fees, and no surprises.',
 })

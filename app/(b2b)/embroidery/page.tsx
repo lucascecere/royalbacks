@@ -7,7 +7,7 @@ import { FaqAccordion } from '@/src/components/b2b/faq-accordion'
 import { LocalBusinessSchema } from '@/src/components/seo/local-business-schema'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Custom Embroidery Services | Milton, MA | Royal Backs',
+  title: 'Custom Embroidery Services in Milton, MA',
   description:
     'Custom embroidery in Milton, MA. Hats, polos, jackets, bags. Fast turnaround, local pickup. Serving South Shore businesses and teams since 2017.',
 })

@@ -45,3 +45,12 @@ export const hasShopifyAdmin = env.SHOPIFY_ADMIN_ACCESS_TOKEN !== ''
 export const hasWebhookSecret = env.SHOPIFY_WEBHOOK_SECRET !== ''
 
 export const hasResend = env.RESEND_API_KEY !== 're_placeholder'
+
+/**
+ * Whether a real Shopify store is wired up. False on the pre-launch preview, where
+ * the catalog is empty by circumstance rather than because a collection sold out —
+ * the storefront should say so plainly instead of rendering "no products found".
+ */
+export const hasShopifyStorefront =
+  env.SHOPIFY_STORE_DOMAIN !== 'placeholder.myshopify.com' &&
+  env.SHOPIFY_STOREFRONT_ACCESS_TOKEN !== 'placeholder-build-token'

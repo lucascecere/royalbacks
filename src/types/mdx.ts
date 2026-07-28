@@ -1,5 +1,7 @@
 export interface BlogFrontmatter {
   title: string
+  /** Optional shorter <title>. The on-page h1 keeps `title`. */
+  meta_title?: string
   description: string
   date: string
   author: string

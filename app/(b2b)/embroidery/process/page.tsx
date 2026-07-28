@@ -4,7 +4,7 @@ import { buildMetadata } from '@/src/lib/seo'
 import { BreadcrumbNav } from '@/src/components/seo/breadcrumb-nav'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'How Custom Embroidery Works | Royal Backs',
+  title: 'How Custom Embroidery Works',
   description:
     'Step-by-step process for ordering custom embroidery from Royal Backs. Turnaround times, file requirements, and what to expect.',
 })

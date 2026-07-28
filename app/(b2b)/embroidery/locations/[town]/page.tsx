@@ -42,10 +42,7 @@ export default async function LocationPage({
 
   const nearbyLocations = getNearbyLocations(town, location.nearby_towns)
 
-  const localBizSchema = buildLocalBusinessSchema({
-    town: location.town,
-    coordinates: location.coordinates,
-  })
+  const localBizSchema = buildLocalBusinessSchema({ coordinates: location.coordinates })
 
   const EMBROIDERY_FAQS = [
     {

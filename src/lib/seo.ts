@@ -26,27 +26,40 @@ export const NAP = {
   addressRegion: 'MA',
   postalCode: '02186',
   addressCountry: 'US',
-  telephone: '', // TBD
+  // No published phone number yet. Left undefined rather than empty: an empty
+  // telephone in LocalBusiness schema is an incomplete listing, whereas an absent
+  // one is simply a field we don't publish. Add it here and it flows into the
+  // schema and the location pages at once.
+  telephone: undefined as string | undefined,
   url: SITE_URL,
   email: 'info@royalbacks.com',
   foundingDate: '2017',
 }
 
-export const SERVICE_AREA_TOWNS = [
-  'Milton',
-  'Quincy',
-  'Braintree',
-  'Weymouth',
-  'Hingham',
-  'Cohasset',
-  'Scituate',
-  'Norwell',
-  'Marshfield',
-  'Duxbury',
-  'Canton',
-  'Randolph',
-  'Dorchester',
-]
+/** The service area, in one place. Drives nav, schema areaServed and the town pages. */
+export const SOUTH_SHORE_TOWNS = [
+  { name: 'Milton', slug: 'milton' },
+  { name: 'Quincy', slug: 'quincy' },
+  { name: 'Braintree', slug: 'braintree' },
+  { name: 'Weymouth', slug: 'weymouth' },
+  { name: 'Hingham', slug: 'hingham' },
+  { name: 'Cohasset', slug: 'cohasset' },
+  { name: 'Scituate', slug: 'scituate' },
+  { name: 'Norwell', slug: 'norwell' },
+  { name: 'Marshfield', slug: 'marshfield' },
+  { name: 'Duxbury', slug: 'duxbury' },
+  { name: 'Canton', slug: 'canton' },
+  { name: 'Randolph', slug: 'randolph' },
+  { name: 'Dorchester', slug: 'dorchester' },
+] as const
+
+export type SouthShoreTown = (typeof SOUTH_SHORE_TOWNS)[number]
+
+export function findTown(slug: string): SouthShoreTown | undefined {
+  return SOUTH_SHORE_TOWNS.find((t) => t.slug === slug)
+}
+
+export const SERVICE_AREA_TOWNS: readonly string[] = SOUTH_SHORE_TOWNS.map((t) => t.name)
 
 export function buildMetadata(overrides: Partial<Metadata> = {}): Metadata {
   const defaults: Metadata = {
@@ -80,8 +93,16 @@ export function buildMetadata(overrides: Partial<Metadata> = {}): Metadata {
   }
 }
 
+/**
+ * LocalBusiness for Royal Backs.
+ *
+ * Always the real Milton address. Earlier this let a page override addressLocality,
+ * so /embroidery/locations/quincy asserted the shop was located in Quincy — untrue,
+ * and the pattern search engines treat as doorway pages. Town coverage belongs in
+ * areaServed, which is emitted below for the whole service area.
+ */
 export function buildLocalBusinessSchema(
-  overrides: { town?: string; coordinates?: { lat: number; lng: number } } = {}
+  overrides: { coordinates?: { lat: number; lng: number } } = {}
 ) {
   return {
     '@context': 'https://schema.org',
@@ -89,10 +110,11 @@ export function buildLocalBusinessSchema(
     name: NAP.name,
     url: NAP.url,
     email: NAP.email,
+    ...(NAP.telephone ? { telephone: NAP.telephone } : {}),
     foundingDate: NAP.foundingDate,
     address: {
       '@type': 'PostalAddress',
-      addressLocality: overrides.town ?? NAP.addressLocality,
+      addressLocality: NAP.addressLocality,
       addressRegion: NAP.addressRegion,
       postalCode: NAP.postalCode,
       addressCountry: NAP.addressCountry,

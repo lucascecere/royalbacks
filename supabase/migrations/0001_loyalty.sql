@@ -113,6 +113,21 @@ alter table points_ledger
   foreign key (redemption_id) references redemptions(id) on delete set null;
 
 -- ---------------------------------------------------------------------------
+-- Newsletter
+-- ---------------------------------------------------------------------------
+
+-- Deliberately separate from `customers`. Putting subscribers in the accounts table
+-- would mean an address that signed up for the newsletter could never afterwards
+-- register — the unique email constraint would reject it.
+create table newsletter_subscribers (
+  id            uuid primary key default gen_random_uuid(),
+  email         citext not null unique,
+  source        text not null default 'footer',
+  unsubscribed_at timestamptz,
+  created_at    timestamptz not null default now()
+);
+
+-- ---------------------------------------------------------------------------
 -- Rate limiting
 -- ---------------------------------------------------------------------------
 
@@ -205,7 +220,8 @@ $$;
 -- Lock everything down. Server-side service-role access only.
 -- ---------------------------------------------------------------------------
 
-alter table customers      enable row level security;
+alter table customers               enable row level security;
+alter table newsletter_subscribers  enable row level security;
 alter table sessions       enable row level security;
 alter table email_tokens   enable row level security;
 alter table points_ledger  enable row level security;

@@ -10,7 +10,9 @@ import { HeroCarousel } from '@/src/components/ui/hero-carousel'
 export const revalidate = 900
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Royal Backs | Custom Hats & Embroidery, Milton MA',
+  // absolute: this is the brand's landing page, so it skips the "| Royal Backs"
+  // template rather than repeating the name twice.
+  title: { absolute: 'Royal Backs | Custom Hats & Embroidery, Milton MA' },
   description:
     'Shop limited-run hats, Boston collections, and local South Shore designs. Custom embroidery also available for teams and businesses.',
 })
