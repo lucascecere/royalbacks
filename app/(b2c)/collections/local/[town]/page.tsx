@@ -9,6 +9,7 @@ import {
   SOUTH_SHORE_TOWNS,
 } from '@/src/lib/seo'
 import { CollectionGrid } from '@/src/components/product/collection-grid'
+import { TownDesignHero } from '@/src/components/local/town-design-hero'
 import { LocalBusinessSchema } from '@/src/components/seo/local-business-schema'
 import { BreadcrumbNav } from '@/src/components/seo/breadcrumb-nav'
 
@@ -87,6 +88,8 @@ export default async function TownCollectionPage({
             proud.
           </p>
         </header>
+
+        {match.assets && <TownDesignHero town={townName} assets={match.assets} />}
 
         <CollectionGrid products={products} collection={`${townName}`} />
 

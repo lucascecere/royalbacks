@@ -36,11 +36,44 @@ export const NAP = {
   foundingDate: '2017',
 }
 
-/** The service area, in one place. Drives nav, schema areaServed and the town pages. */
-export const SOUTH_SHORE_TOWNS = [
+export interface TownAssets {
+  /** Transparent PNG of the town wordmark as it's stitched. */
+  wordmark?: string
+  /** Secondary mark, e.g. a side-panel icon. Transparent PNG. */
+  icon?: string
+  /** Product shot of the finished cap. */
+  product?: string
+  productAlt?: string
+  /** Accent colour pulled from the design, for the town hero. */
+  accent?: string
+}
+
+export interface TownEntry {
+  name: string
+  slug: string
+  assets?: TownAssets
+}
+
+/**
+ * The service area, in one place. Drives nav, schema areaServed and the town pages.
+ *
+ * `assets` are optional — a town without them still gets a working page. Designs
+ * get added here as they're finished.
+ */
+export const SOUTH_SHORE_TOWNS: readonly TownEntry[] = [
   { name: 'Milton', slug: 'milton' },
   { name: 'Quincy', slug: 'quincy' },
-  { name: 'Braintree', slug: 'braintree' },
+  {
+    name: 'Braintree',
+    slug: 'braintree',
+    assets: {
+      wordmark: '/towns/braintree/wordmark.png',
+      icon: '/towns/braintree/icon.png',
+      product: '/towns/braintree/product.jpg',
+      productAlt: 'Royal Backs Braintree cap, cream crown with a black brim',
+      accent: '#1B39C4',
+    },
+  },
   { name: 'Weymouth', slug: 'weymouth' },
   { name: 'Hingham', slug: 'hingham' },
   { name: 'Cohasset', slug: 'cohasset' },
@@ -51,9 +84,9 @@ export const SOUTH_SHORE_TOWNS = [
   { name: 'Canton', slug: 'canton' },
   { name: 'Randolph', slug: 'randolph' },
   { name: 'Dorchester', slug: 'dorchester' },
-] as const
+]
 
-export type SouthShoreTown = (typeof SOUTH_SHORE_TOWNS)[number]
+export type SouthShoreTown = TownEntry
 
 export function findTown(slug: string): SouthShoreTown | undefined {
   return SOUTH_SHORE_TOWNS.find((t) => t.slug === slug)

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { buildMetadata, SOUTH_SHORE_TOWNS } from '@/src/lib/seo'
 import { BreadcrumbNav } from '@/src/components/seo/breadcrumb-nav'
 
@@ -33,12 +34,28 @@ export default function LocalCollectionPage() {
           <Link
             key={town.slug}
             href={`/collections/local/${town.slug}`}
-            className="group block p-5 bg-white border border-rb-border rounded-sm hover:border-rb-navy hover:shadow-sm transition-all text-center"
+            className="group block bg-white border border-rb-border rounded-sm overflow-hidden hover:border-rb-navy hover:shadow-sm transition-all"
           >
-            <span className="font-display text-lg font-semibold text-rb-navy group-hover:text-rb-gold transition-colors">
-              {town.name}
-            </span>
-            <p className="text-xs text-rb-muted mt-1">View hats &rarr;</p>
+            {/* Towns with a finished design show it; the rest stay a plain tile. */}
+            {town.assets?.product && (
+              <div className="relative aspect-[4/3] bg-[#F7F6F4] overflow-hidden">
+                <Image
+                  src={town.assets.product}
+                  alt={town.assets.productAlt ?? `Royal Backs ${town.name} cap`}
+                  fill
+                  className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                  sizes="(max-width: 640px) 50vw, 25vw"
+                />
+              </div>
+            )}
+            <div className="p-5 text-center">
+              <span className="font-display text-lg font-semibold text-rb-navy group-hover:text-rb-gold transition-colors">
+                {town.name}
+              </span>
+              <p className="text-xs text-rb-muted mt-1">
+                {town.assets?.product ? 'Shop the cap' : 'View hats'} &rarr;
+              </p>
+            </div>
           </Link>
         ))}
       </div>
