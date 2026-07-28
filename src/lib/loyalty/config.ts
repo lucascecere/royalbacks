@@ -3,8 +3,32 @@
  * The ledger stores raw point deltas, so changing these never rewrites history.
  */
 
-/** Points earned per whole dollar of net merchandise spend. */
+/**
+ * Earning rates, per whole dollar of net merchandise spend.
+ *
+ * Retail and wholesale are deliberately separate. Rewards come out of gross margin,
+ * not revenue, and the two sides of this business have very different margins — a $35
+ * hat and a $3,000 embroidery contract cannot safely pay the same percentage back.
+ */
 export const POINTS_PER_DOLLAR = 1
+
+/**
+ * Embroidery / draft-order rate.
+ *
+ * Deliberately below retail and capped per order. If Dylan nets ~$200 on a $3,000 job,
+ * retail's 2% back would be $60 — nearly a third of the profit — and the cap is what
+ * stops one large contract from erasing the margin on it.
+ *
+ * REVISIT once Dylan confirms his actual gross margin on a large job. If it's healthy
+ * (40%+, which the published per-piece pricing suggests) this can go up to or past the
+ * retail rate, which is the generous-to-repeat-buyers outcome we actually want.
+ */
+export const POINTS_PER_DOLLAR_WHOLESALE = 0.5
+
+/** Ceiling on a single wholesale order, ≈$20 of reward value at the entry tier. */
+export const WHOLESALE_POINTS_CAP_PER_ORDER = 1000
+
+export type EarningChannel = 'retail' | 'wholesale'
 
 /**
  * Redemption ladder. `points` buys `valueCents` off an order.
@@ -44,10 +68,23 @@ export function findTier(points: number): RedemptionTier | undefined {
  *
  * Takes net merchandise cents — tax and shipping excluded upstream, since neither is
  * revenue Royal Backs keeps. Rounds down so we never award points that weren't earned.
+ *
+ * Wholesale earns at its own rate and is capped per order, so a single large embroidery
+ * contract can't hand back more than the job made.
  */
-export function pointsForSpend(netMerchandiseCents: number): number {
+export function pointsForSpend(
+  netMerchandiseCents: number,
+  channel: EarningChannel = 'retail'
+): number {
   if (netMerchandiseCents <= 0) return 0
-  return Math.floor((netMerchandiseCents / 100) * POINTS_PER_DOLLAR)
+
+  const rate =
+    channel === 'wholesale' ? POINTS_PER_DOLLAR_WHOLESALE : POINTS_PER_DOLLAR
+  const earned = Math.floor((netMerchandiseCents / 100) * rate)
+
+  return channel === 'wholesale'
+    ? Math.min(earned, WHOLESALE_POINTS_CAP_PER_ORDER)
+    : earned
 }
 
 /** The best tier a balance can afford, or undefined if it can't afford any. */

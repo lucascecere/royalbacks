@@ -8,6 +8,7 @@ import {
   findTier,
   pointsForSpend,
   REDEMPTION_TTL_DAYS,
+  type EarningChannel,
 } from '@/src/lib/loyalty/config'
 
 export interface LedgerEntry {
@@ -95,10 +96,12 @@ export async function awardOrderPoints(params: {
   email: string
   netMerchandiseCents: number
   shopifyOrderId: string
+  channel?: EarningChannel
   note?: string
 }): Promise<{ awarded: number; duplicate: boolean; customerId: string | null }> {
   const email = normalizeEmail(params.email)
-  const points = pointsForSpend(params.netMerchandiseCents)
+  const channel = params.channel ?? 'retail'
+  const points = pointsForSpend(params.netMerchandiseCents, channel)
 
   if (points <= 0) return { awarded: 0, duplicate: false, customerId: null }
 
@@ -116,6 +119,7 @@ export async function awardOrderPoints(params: {
     delta: points,
     reason: 'order_earned',
     shopify_order_id: params.shopifyOrderId,
+    channel,
     idempotency_key: `order_paid:${params.shopifyOrderId}`,
     note: params.note ?? null,
   })
@@ -142,10 +146,30 @@ export async function clawbackPoints(params: {
   shopifyOrderId: string
   idempotencyKey: string
   reason: 'order_refunded'
+  channel?: EarningChannel
   note?: string
 }): Promise<{ reversed: number; duplicate: boolean }> {
   const email = normalizeEmail(params.email)
-  const points = pointsForSpend(params.refundedMerchandiseCents)
+  // Same rate the award used, or a wholesale refund reverses more than it gave.
+  const raw = pointsForSpend(params.refundedMerchandiseCents, params.channel ?? 'retail')
+  if (raw <= 0) return { reversed: 0, duplicate: false }
+
+  // Backstop against rounding, partial refunds that overlap, and a cancellation
+  // following a refund: the total clawed back for an order can never exceed what
+  // that order awarded in the first place.
+  const { data: history } = await db()
+    .from('points_ledger')
+    .select('delta, reason')
+    .eq('shopify_order_id', params.shopifyOrderId)
+
+  const awarded = (history ?? [])
+    .filter((r) => r.reason === 'order_earned')
+    .reduce((sum, r) => sum + r.delta, 0)
+  const alreadyReversed = (history ?? [])
+    .filter((r) => r.reason === 'order_refunded')
+    .reduce((sum, r) => sum - r.delta, 0)
+
+  const points = Math.max(0, Math.min(raw, awarded - alreadyReversed))
   if (points <= 0) return { reversed: 0, duplicate: false }
 
   const { data: customer } = await db()

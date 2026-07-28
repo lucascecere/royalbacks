@@ -73,6 +73,10 @@ create table points_ledger (
                    )),
   shopify_order_id text,
   redemption_id    uuid,
+  -- Which rate the award used. A refund has to reverse at the same rate, or a
+  -- wholesale order would claw back at the higher retail rate.
+  channel          text not null default 'retail'
+                     check (channel in ('retail', 'wholesale')),
   -- The guardrail against double-awarding. Shopify retries webhooks; orders/paid
   -- will fire more than once. A unique key makes duplicates impossible in the
   -- database rather than hoping application logic wins the race.

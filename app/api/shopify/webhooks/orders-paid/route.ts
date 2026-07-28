@@ -1,5 +1,9 @@
 import { NextResponse } from 'next/server'
-import { verifyWebhook, netMerchandiseCents } from '@/src/lib/shopify/webhook'
+import {
+  verifyWebhook,
+  netMerchandiseCents,
+  earningChannel,
+} from '@/src/lib/shopify/webhook'
 import { awardOrderPoints, markRedemptionUsed, getBalance } from '@/src/services/loyalty'
 import { sendPointsEarnedEmail } from '@/src/services/loyalty-email'
 import { db } from '@/src/lib/db'
@@ -17,6 +21,8 @@ interface OrderPaidPayload {
   total_discounts?: string | null
   discount_codes?: Array<{ code: string }>
   order_number?: number
+  source_name?: string | null
+  tags?: string | null
 }
 
 export async function POST(req: Request) {
@@ -37,11 +43,15 @@ export async function POST(req: Request) {
   }
 
   try {
+    const channel = earningChannel(order)
     const result = await awardOrderPoints({
       email,
       netMerchandiseCents: netMerchandiseCents(order),
       shopifyOrderId: String(order.id),
-      note: order.order_number ? `Order #${order.order_number}` : undefined,
+      channel,
+      note: order.order_number
+        ? `${channel === 'wholesale' ? 'Embroidery order' : 'Order'} #${order.order_number}`
+        : undefined,
     })
 
     // Close out any loyalty code this order consumed.

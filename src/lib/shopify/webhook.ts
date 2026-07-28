@@ -58,6 +58,30 @@ interface Orderish {
   total_discounts?: string | null
 }
 
+interface Channelish {
+  source_name?: string | null
+  tags?: string | string[] | null
+}
+
+/**
+ * Which earning rate an order falls under.
+ *
+ * Embroidery is invoiced as a Shopify draft order, and Shopify stamps those with
+ * `source_name: "shopify_draft_order"` — so this needs nothing extra from Dylan at
+ * invoicing time. A `wholesale` tag is honoured as a manual override for anything that
+ * comes through another route.
+ */
+export function earningChannel(order: Channelish): 'retail' | 'wholesale' {
+  if (order.source_name === 'shopify_draft_order') return 'wholesale'
+
+  const tags = Array.isArray(order.tags)
+    ? order.tags
+    : (order.tags ?? '').split(',')
+  if (tags.some((t) => t.trim().toLowerCase() === 'wholesale')) return 'wholesale'
+
+  return 'retail'
+}
+
 /**
  * The amount points are earned on: merchandise only, after discounts, before tax
  * and shipping.

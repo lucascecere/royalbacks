@@ -6,7 +6,8 @@ the webhooks reject everything. The rest of the site is unaffected.
 
 ## Mechanics
 
-- Earn **1 point per $1** of merchandise spend (tax and shipping excluded).
+- Retail earns **1 point per $1** of merchandise spend (tax and shipping excluded).
+- Embroidery earns **0.5 points per $1, capped at 1,000 points per order** (~$25 back).
 - Redeem **500 pts → $10**, **1000 pts → $25**, **2000 pts → $60**.
 - Rewards expire after **30 days**; unused points come back automatically.
 - Retail and embroidery both earn, as long as embroidery is invoiced through Shopify.
@@ -91,9 +92,31 @@ attached. When the invoice is paid it becomes a normal order, `orders/paid` fire
 points are awarded through exactly the same path as a retail sale — no separate code,
 no manual entry.
 
-> At 1pt/$1 a $3,000 embroidery job earns 3,000 points ≈ $60–90 in rewards. Confirm with
-> Dylan whether that's the rate he wants for B2B before launch, or set a lower rate or a
-> per-order cap in `config.ts`.
+Orders invoiced as draft orders are detected automatically (Shopify stamps them
+`source_name: shopify_draft_order`), so this needs nothing extra at invoicing time. A
+`wholesale` tag on any order forces the same treatment.
+
+### The wholesale rate is a placeholder — confirm it with Dylan
+
+It's set low on purpose, because rewards come out of **gross margin, not revenue** and
+nobody has told us what the margin on a large job actually is.
+
+On a $3,000 job:
+
+| | points | reward | share of a $200 profit |
+|---|---|---|---|
+| Retail rate (1pt/$1) | 3,000 | $60 | 30% |
+| Wholesale rate (0.5pt/$1, capped) | 1,000 | $25 | 13% |
+
+**Ask Dylan one question: what does he clear on a $3,000 job after blanks, thread and
+his time?** If it's genuinely ~$200, even the current wholesale rate is arguably
+generous. If it's $1,000+ — which the published per-piece pricing suggests, since ~300
+caps at ~$10 against $4–6 blanks is roughly 50% gross — then raise
+`POINTS_PER_DOLLAR_WHOLESALE` to 1 or above and lift the cap. Repeat B2B customers are
+exactly who a loyalty program should be generous to; we just can't size it blind.
+
+Both dials are in `src/lib/loyalty/config.ts` and take effect immediately without a
+migration or any rewrite of ledger history.
 
 ---
 

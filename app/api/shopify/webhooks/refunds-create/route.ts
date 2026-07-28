@@ -56,7 +56,7 @@ export async function POST(req: Request) {
     // The refund payload carries no email; find it on the original order's ledger row.
     const { data: original } = await db()
       .from('points_ledger')
-      .select('email')
+      .select('email, channel')
       .eq('shopify_order_id', String(refund.order_id))
       .eq('reason', 'order_earned')
       .maybeSingle()
@@ -74,6 +74,8 @@ export async function POST(req: Request) {
       // and each should reverse its own share.
       idempotencyKey: `refund:${refund.id}`,
       reason: 'order_refunded',
+      // Reverse at whatever rate the award used.
+      channel: original.channel === 'wholesale' ? 'wholesale' : 'retail',
       note: `Refund on order ${refund.order_id}`,
     })
 

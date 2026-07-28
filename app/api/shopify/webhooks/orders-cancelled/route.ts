@@ -1,5 +1,9 @@
 import { NextResponse } from 'next/server'
-import { verifyWebhook, netMerchandiseCents } from '@/src/lib/shopify/webhook'
+import {
+  verifyWebhook,
+  netMerchandiseCents,
+  earningChannel,
+} from '@/src/lib/shopify/webhook'
 import { clawbackPoints } from '@/src/services/loyalty'
 import { hasLoyalty } from '@/src/lib/env'
 
@@ -13,6 +17,8 @@ interface OrderCancelledPayload {
   current_subtotal_price?: string | null
   subtotal_price?: string | null
   total_discounts?: string | null
+  source_name?: string | null
+  tags?: string | null
 }
 
 export async function POST(req: Request) {
@@ -35,6 +41,7 @@ export async function POST(req: Request) {
       shopifyOrderId: String(order.id),
       idempotencyKey: `order_cancelled:${order.id}`,
       reason: 'order_refunded',
+      channel: earningChannel(order),
       note: `Order ${order.id} cancelled`,
     })
 
