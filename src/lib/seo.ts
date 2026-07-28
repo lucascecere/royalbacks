@@ -63,17 +63,7 @@ export interface TownEntry {
 export const SOUTH_SHORE_TOWNS: readonly TownEntry[] = [
   { name: 'Milton', slug: 'milton' },
   { name: 'Quincy', slug: 'quincy' },
-  {
-    name: 'Braintree',
-    slug: 'braintree',
-    assets: {
-      wordmark: '/towns/braintree/wordmark.png',
-      icon: '/towns/braintree/icon.png',
-      product: '/towns/braintree/product.jpg',
-      productAlt: 'Royal Backs Braintree cap, cream crown with a black brim',
-      accent: '#1B39C4',
-    },
-  },
+  { name: 'Braintree', slug: 'braintree' },
   { name: 'Weymouth', slug: 'weymouth' },
   { name: 'Hingham', slug: 'hingham' },
   { name: 'Cohasset', slug: 'cohasset' },
